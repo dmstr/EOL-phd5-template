@@ -27,6 +27,41 @@ Start stack
         
     docker-compose up -d
 
+### Extend
+    
+    docker cp planck_php_1:/app/composer.json ./src
+    docker cp planck_php_1:/app/composer.lock ./src
+
+    cd src
+    composer update
+    
+    edit Dockerfile
+    
+    docker-compose build
+
+### Customize
+
+Adjust config
+
+    return [
+        'aliases' => [
+            '@aye/frontend' => '@app/modules/frontend'
+        ],
+        'modules' => [
+            'frontend' => [
+                'class' => 'aye\frontend\Module'
+            ]
+        ]
+    ];
+
+Create bash    
+    
+    docker-compose run --rm -e YII_ENV=dev php bash
+
+Create module    
+    
+    $ yii gii/module --moduleID=frontend --moduleClass=aye\\frontend\\Module
+
 ## Support
 
 
