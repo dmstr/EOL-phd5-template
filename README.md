@@ -21,7 +21,7 @@ Build images
     
 Inital setup of application    
 
-    docker-compose run -e APP_ADMIN_PASSWORD=admin1 php yii app/setup
+    docker-compose run --rm -e APP_ADMIN_PASSWORD=admin1 php yii app/setup
         
 Start stack
         
