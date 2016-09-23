@@ -62,6 +62,12 @@ Create module
     
     $ yii gii/module --moduleID=frontend --moduleClass=aye\\frontend\\Module
 
+Create additional controller
+
+    $ yii gii/controller \
+        --controllerClass=aye\\frontend\\controllers\\ExamplesController \
+        --viewPath=@aye/frontend/views/examples
+
 ## Support
 
 
