@@ -11,6 +11,10 @@ Installation | Setup | Configuration | Usage | Upgrading
 
 ### Getting started
 
+Create environment config
+
+    cp .env-dist .env
+
 Build images
 
     docker-compose build
