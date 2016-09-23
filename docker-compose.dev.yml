@@ -1,0 +1,42 @@
+# Development stack overrides
+#
+# Variables are populated with values from `.env`
+#
+version: '2'
+services:
+  php:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      #args:
+      #  - GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
+    ports:
+      - 80
+    depends_on:
+      - db
+    environment:
+      - YII_ENV=dev
+      # For host-volume development (permissions)
+      - MYSQL_ROOT_PASSWORD=secret
+      - PHP_USER_ID=1000
+      - GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
+      # For usage with https://github.com/jwilder/nginx-proxy
+      # - VIRTUAL_HOST=${VIRTUAL_HOST}
+    volumes:
+      - ./src/modules:/app/src/modules
+      # Custom packages
+      #- ~/.composer/cache:/root/.composer/cache
+      #- ./src/composer.json:/app/composer.json
+      #- ./src/composer.lock:/app/composer.lock
+      # Debug
+      #- ./src/modules/planck.env:/app/src/modules/planck.env
+      #- ./web/assets:/app/web/assets
+      #- ./vendor:/app/vendor
+      #- ./runtime:/app/runtime
+  db:
+    command: --character-set-server=utf8 --collation-server=utf8_general_ci
+    image: percona:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+    ports:
+      - '3306'
