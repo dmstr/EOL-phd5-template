@@ -20,8 +20,11 @@ release:
   stage: release
   script:
     - docker-compose push
+  only:
+    - release
 
 cleanup:
   stage: cleanup
   script:
     - docker-compose down -v
+  when: always
