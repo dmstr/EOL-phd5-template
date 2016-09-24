@@ -29,10 +29,10 @@ Start stack
 
 ### Extend
     
-    docker cp planck_php_1:/app/composer.json ./src
-    docker cp planck_php_1:/app/composer.lock ./src
+    docker cp planck_php_1:/app/composer.json .
+    docker cp planck_php_1:/app/composer.lock .
+    docker cp planck_php_1:/app/src/app.env ./src
 
-    cd src
     composer update
     
     edit Dockerfile

@@ -1,6 +1,6 @@
 before_script:
   - export APP_VERSION=$(git describe --always --dirty)
-  - export STACK_PHP_IMAGE=registry/namespace/app:${APP_VERSION}
+  - export STACK_PHP_IMAGE=${REGISTRY_HOST}/${CI_BUILD_PATH}:${APP_VERSION}
   - export ISOLATION=buildref${CI_BUILD_REF}$(echo ${CI_BUILD_REF_NAME} | tr -dc '[:alnum:]\n\r' | tr '[:upper:]' '[:lower:]')
   - export COMPOSE_PROJECT_NAME=${ISOLATION}
 

@@ -5,6 +5,7 @@
 version: '2'
 services:
   php:
+    image: dev/${STACK_PHP_IMAGE}
     build:
       dockerfile: Dockerfile
       context: .
@@ -25,8 +26,8 @@ services:
       - ./src/modules:/app/src/modules
       # Custom packages
       #- ~/.composer/cache:/root/.composer/cache
-      #- ./src/composer.json:/app/composer.json
-      #- ./src/composer.lock:/app/composer.lock
+      #- ./composer.json:/app/composer.json
+      #- ./composer.lock:/app/composer.lock
       # Debug
       #- ./src/modules/planck.env:/app/src/modules/planck.env
       #- ./web/assets:/app/web/assets
