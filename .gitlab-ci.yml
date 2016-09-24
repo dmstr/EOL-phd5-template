@@ -2,7 +2,7 @@
 before_script:
   - export ISOLATION=buildpipeline${CI_PIPELINE_ID}
   - export APP_VERSION=$(git describe --always --dirty)
-  - export STACK_PHP_IMAGE=${REGISTRY_HOST}/${CI_PROJECT_PATH}:${APP_VERSION}
+  - export STACK_PHP_IMAGE=${REGISTRY_HOST}/${CI_PROJECT_PATH}/php:${APP_VERSION}
   - export COMPOSE_PROJECT_NAME=${ISOLATION}
   - export COMPOSE_FILE=./docker-compose.yml:./docker-compose.test.yml
 
@@ -22,6 +22,7 @@ release:
     - docker-compose push
   only:
     - release
+    - tags
 
 cleanup:
   stage: cleanup

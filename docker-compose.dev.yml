@@ -24,7 +24,7 @@ services:
       # - VIRTUAL_HOST=${VIRTUAL_HOST}
     volumes:
       - ./src/modules:/app/src/modules
-      # Custom packages
+      # Develop with additional packages
       #- ~/.composer/cache:/root/.composer/cache
       #- ./composer.json:/app/composer.json
       #- ./composer.lock:/app/composer.lock
