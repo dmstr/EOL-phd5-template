@@ -29,7 +29,7 @@ services:
       #- ./composer.json:/app/composer.json
       #- ./composer.lock:/app/composer.lock
       # Debug
-      #- ./src/modules/planck.env:/app/src/modules/planck.env
+      #- ./src/app.env:/app/src/app.env
       #- ./web/assets:/app/web/assets
       #- ./vendor:/app/vendor
       #- ./runtime:/app/runtime
