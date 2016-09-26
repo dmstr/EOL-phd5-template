@@ -14,8 +14,11 @@ before_install:
 script:
   - docker-compose run --rm php yii app/setup
 
-after_success:
-  - docker login -u="$REGISTRY_USER" -p="$REGISTRY_PASS" $REGISTRY_HOST
-  - if [ "${TRAVIS_BRANCH}" = "release" ]; then docker-compose push || exit 1; fi
-  - docker logout
+after_success: >
+  docker login -u="$REGISTRY_USER" -p="$REGISTRY_PASS" $REGISTRY_HOST
+  if [ "${TRAVIS_BRANCH}" = "release" ];
+    then docker-compose push || exit 1
+    curl -X POST -F token=${TOKEN_STACKS_STAGING_2} -F "ref=master" -F "variables[TRIGGER_STACK_DIR]=demos/${TRAVIS_REPO_SLUG}" https://git.hrzg.de/api/v3/projects/384/trigger/builds
+  fi
+  docker logout
 
