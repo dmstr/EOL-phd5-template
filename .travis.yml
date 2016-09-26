@@ -21,7 +21,6 @@ after_success: |
     docker tag ${STACK_PHP_IMAGE} ${STACK_PHP_IMAGE_LATEST}
     docker-compose push || exit 1
     docker push ${STACK_PHP_IMAGE_LATEST} || exit 1
-    curl -X POST -F token=${TOKEN_STACKS_STAGING_2} -F "ref=master" -F "variables[TRIGGER_STACK_DIR]=demos/${TRAVIS_REPO_SLUG}" https://git.hrzg.de/api/v3/projects/384/trigger/builds
   fi
   docker logout
 
