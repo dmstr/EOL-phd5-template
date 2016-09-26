@@ -5,9 +5,7 @@ planck
 
 ## Documentation
 
-Installation | Setup | Configuration | Usage | Upgrading
-
-> Demo, Screenshot
+[Quick start tutorial](https://github.com/dmstr/docs-phd5/blob/master/guide/tutorials/docker-build-from-phd.md) | [Guide](https://github.com/dmstr/docs-phd5/blob/master/guide/README.md)
 
 ### Getting started
 
@@ -21,56 +19,23 @@ Build images
     
 Inital setup of application    
 
-    docker-compose run --rm -e APP_ADMIN_PASSWORD=admin1 php yii app/setup
+    docker-compose run --rm \
+        -e APP_ADMIN_PASSWORD=admin1 \
+        -e APP_MIGRATION_LOOKUP=@app/migrations/demo-data \
+        php yii app/setup
         
 Start stack
         
     docker-compose up -d
 
-### Extend
-    
-    docker cp planck_php_1:/app/composer.json .
-    docker cp planck_php_1:/app/composer.lock .
-    docker cp planck_php_1:/app/src/app.env ./src
+Open your 
 
-    composer update
-    
-    edit Dockerfile
-    
-    docker-compose build
+## Demo
 
-### Customize
+http://demo.apptransporter.com.staging-2.oneba.se
 
-Adjust config
-
-    return [
-        'aliases' => [
-            '@aye/frontend' => '@app/modules/frontend'
-        ],
-        'modules' => [
-            'frontend' => [
-                'class' => 'aye\frontend\Module'
-            ]
-        ]
-    ];
-
-Create bash    
-    
-    docker-compose run --rm -e YII_ENV=dev php bash
-
-Create module    
-    
-    $ yii gii/module --moduleID=frontend --moduleClass=aye\\frontend\\Module
-
-Create additional controller
-
-    $ yii gii/controller \
-        --controllerClass=aye\\frontend\\controllers\\ExamplesController \
-        --viewPath=@aye/frontend/views/examples
-
-### Deploy
-
-    REGISTRY_HOST
+![Frontend](https://raw.githubusercontent.com/dmstr/gh-media/master/dmstr/planck/apptransporter-demo-frontend.png)
+![Backend](https://raw.githubusercontent.com/dmstr/gh-media/master/dmstr/planck/apptransporter-demo-backend.png)
 
 ## Support
 
@@ -81,10 +46,11 @@ Create additional controller
 ## License
 
 
+
 ## Resources
 
 - links
 
 ---
 
-Built by
+### ![dmstr logo](http://t.phundament.com/dmstr-16-cropped.png) Built with [phd](http://phd.dmstr.io) from [dmstr](http://diemeisterei.de)
