@@ -16,5 +16,6 @@ script:
 
 after_success:
   - docker login -u="$REGISTRY_USER" -p="$REGISTRY_PASS" $REGISTRY_HOST
-  - docker-compose push || exit 1
+  - if [ "${TRAVIS_BRANCH}" = "release" ]; then docker-compose push || exit 1; fi
   - docker logout
+
