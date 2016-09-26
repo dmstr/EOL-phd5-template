@@ -9,15 +9,18 @@ before_install:
   - export COMPOSE_FILE=./docker-compose.yml:./docker-compose.test.yml
   - export APP_VERSION=$(git describe --always --dirty)
   - export STACK_PHP_IMAGE=${TRAVIS_REPO_SLUG}:${APP_VERSION}
+  - export STACK_PHP_IMAGE_LATEST=${TRAVIS_REPO_SLUG}:latest
   - docker-compose build --pull
 
 script:
   - docker-compose run --rm php yii app/setup
 
-after_success: >
+after_success: |
   docker login -u="$REGISTRY_USER" -p="$REGISTRY_PASS" $REGISTRY_HOST
-  if [ "${TRAVIS_BRANCH}" = "release" ];
-    then docker-compose push || exit 1
+  if [ "${TRAVIS_BRANCH}" = "release" ] then
+    docker tag ${STACK_PHP_IMAGE} ${STACK_PHP_IMAGE_LATEST}
+    docker-compose push || exit 1
+    docker push ${STACK_PHP_IMAGE_LATEST} || exit 1
     curl -X POST -F token=${TOKEN_STACKS_STAGING_2} -F "ref=master" -F "variables[TRIGGER_STACK_DIR]=demos/${TRAVIS_REPO_SLUG}" https://git.hrzg.de/api/v3/projects/384/trigger/builds
   fi
   docker logout
