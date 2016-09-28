@@ -1,0 +1,46 @@
+# Test stack overrides
+#
+# Paths in this file are relative to the project root
+version: '2'
+services:
+  php:
+    working_dir: /app/tests
+    ports:
+      - 80
+    depends_on:
+      - firefox
+    environment:
+      - APP_NAME=test-ee
+      - APP_TITLE=Doro TEST
+      - APP_MIGRATION_LOOKUP=@root/tests/codeception/_migrations/data
+      - APP_ADMIN_PASSWORD=admin1
+      - APP_INTERACTIVE=0
+      - APP_ASSET_USE_BUNDLED=1
+      - PHP_ENABLE_XDEBUG=${PHP_ENABLE_XDEBUG}
+      - MYSQL_ROOT_PASSWORD=secret
+    volumes:
+      - ./tests:/app/tests
+      # Settings for local test-development
+      #- ./runtime:/app/runtime
+      #- ./src:/app/src
+      #- ./web:/app/web
+      #- ./vendor:/app/vendor
+    networks:
+      default:
+        aliases:
+          - web
+  db:
+    image: percona:5.6
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+    ports:
+      - '3306'
+  firefox:
+    image: selenium/standalone-firefox-debug:2.53.0
+    # workaround for Docker Beta, see https://github.com/SeleniumHQ/docker-selenium/issues/227#issuecomment-224865735
+    dns: 8.8.4.4
+    environment:
+      - no_proxy=localhost
+    ports:
+      - '4444'
+      - '5900'
