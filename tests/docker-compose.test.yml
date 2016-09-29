@@ -4,6 +4,9 @@
 version: '2'
 services:
   php:
+    build:
+      dockerfile: Dockerfile
+      context: .
     working_dir: /app/tests
     ports:
       - 80
