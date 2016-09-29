@@ -12,7 +12,7 @@ services:
       #args:
       #  - GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
     ports:
-      - 80
+      - 21080:80
     depends_on:
       - db
     environment:
