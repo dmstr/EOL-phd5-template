@@ -20,7 +20,6 @@ build:
 release:
   stage: release
   script:
-    - docker-compose push
     - docker tag ${STACK_PHP_IMAGE} ${STACK_PHP_IMAGE_LATEST}
     - docker-compose push || exit 1
     - docker push ${STACK_PHP_IMAGE_LATEST} || exit 1
