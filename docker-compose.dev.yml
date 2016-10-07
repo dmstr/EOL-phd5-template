@@ -5,7 +5,7 @@
 version: '2'
 services:
   php:
-    image: dev/${STACK_PHP_IMAGE}
+    image: ${STACK_PHP_IMAGE}
     build:
       dockerfile: Dockerfile
       context: .
