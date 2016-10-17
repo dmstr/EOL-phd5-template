@@ -1,2 +1,13 @@
-src/vendor
 *.env
+
+.idea
+_artifacts
+
+version
+vendor
+runtime
+web/assets
+web/bundles
+
+docker-compose.override.yml
+tests/codeception/_output

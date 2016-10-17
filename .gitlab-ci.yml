@@ -17,15 +17,20 @@ build:
   script:
     - docker-compose build --pull
 
-release:
+release:latest:
   stage: release
   script:
     - docker tag ${STACK_PHP_IMAGE} ${STACK_PHP_IMAGE_LATEST}
-    - docker-compose push || exit 1
     - docker push ${STACK_PHP_IMAGE_LATEST} || exit 1
-
   only:
     - latest
+
+release:tags:
+  stage: release
+  script:
+    - docker-compose push || exit 1
+  only:
+    - release
     - tags
 
 cleanup:
