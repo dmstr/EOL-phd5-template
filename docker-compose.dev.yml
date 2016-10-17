@@ -5,7 +5,7 @@
 version: '2'
 services:
   php:
-    image: dev/${STACK_PHP_IMAGE}
+    image: ${STACK_PHP_IMAGE}
     build:
       dockerfile: Dockerfile
       context: .
@@ -29,7 +29,7 @@ services:
       #- ./composer.json:/app/composer.json
       #- ./composer.lock:/app/composer.lock
       # Debug
-      #- ./src/app.env:/app/src/app.env
+      #- ./src/local.env:/app/src/local.env
       #- ./web/assets:/app/web/assets
       #- ./vendor:/app/vendor
       #- ./runtime:/app/runtime
