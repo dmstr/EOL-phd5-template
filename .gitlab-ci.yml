@@ -36,5 +36,6 @@ release:tags:
 cleanup:
   stage: cleanup
   script:
+    - docker-compose kill
     - docker-compose down -v
   when: always

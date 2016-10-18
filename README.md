@@ -1,7 +1,7 @@
 planck
 ======
 
-0 line application template
+Web application template built from `dmstr/phd5-app`
 
 ## Documentation
 
@@ -9,9 +9,13 @@ planck
 
 ### Getting started
 
+
+
 Create environment config
 
     cp .env-dist .env
+    
+Create application `src/local.env`, if needed.    
 
 Build images
 
@@ -28,28 +32,10 @@ Start stack
         
     docker-compose up -d
 
-Open your 
-
-## Demo
-
-http://demo.apptransporter.com.staging-2.oneba.se
-
-![Frontend](https://raw.githubusercontent.com/dmstr/gh-media/master/dmstr/planck/apptransporter-demo-frontend.png)
-![Backend](https://raw.githubusercontent.com/dmstr/gh-media/master/dmstr/planck/apptransporter-demo-backend.png)
-
-## Support
-
-
-## Contribute
-
-
-## License
-
-
-
-## Resources
-
-- links
+Open your browser
+ 
+    open http://$DOCKER_HOST_IP:21080
+    
 
 ---
 
