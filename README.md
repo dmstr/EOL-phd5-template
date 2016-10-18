@@ -9,7 +9,7 @@ Web application template built from `dmstr/phd5-app`
 
 ### Getting started
 
-
+Update `Dockerfile`.
 
 Create environment config
 
