@@ -35,7 +35,8 @@ Start stack
 Open your browser
  
     open http://$DOCKER_HOST_IP:21080
-    
+
+Login with `admin` / `admin1`    
 
 ---
 
