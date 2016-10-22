@@ -1,0 +1,35 @@
+actor: Tester
+paths:
+    tests: codeception
+    log: codeception/_output
+    data: codeception/_data
+    support: codeception/_support
+    envs: codeception/_envs
+settings:
+    bootstrap: _bootstrap.php
+    colors: true
+    memory_limit: 1024M
+extensions:
+    enabled:
+        - Codeception\Extension\RunFailed
+modules:
+    config:
+        Db:
+            dsn: ''
+            user: ''
+            password: ''
+            dump: codeception/_data/dump.sql
+config:
+    test_entry_url: http://web:80/index.php
+coverage:
+    enabled: true
+    c3_url: http://web/
+    remote: false
+    whitelist:
+        include:
+            - ../src/*.php
+            - ../vendor/dmstr/*.php
+            - ../vendor/hrzg/*.php
+        exclude:
+            - ../src/commands/*
+            - ../src/migrations/*

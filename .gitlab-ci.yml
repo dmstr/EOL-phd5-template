@@ -17,6 +17,12 @@ build:
   script:
     - docker-compose build --pull
 
+test:
+  stage: test
+  script:
+    - docker-compose up -d
+    - docker-compose run php codecept run
+
 release:latest:
   stage: release
   script:

@@ -1,4 +1,4 @@
-FROM dmstr/phd5-app:5.0.0-beta3
+FROM dmstr/phd5-app:5.0.0-beta5
 
 # Additional packages, see also `docker-compose.dev.yml` for host-volumes
 #COPY ./composer.* /app/
