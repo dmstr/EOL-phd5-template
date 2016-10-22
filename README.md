@@ -5,7 +5,7 @@ Web application template built from `dmstr/phd5-app`
 
 ## Documentation
 
-[Quick start tutorial](https://github.com/dmstr/docs-phd5/blob/master/guide/tutorials/docker-build-from-phd.md) | [Guide](https://github.com/dmstr/docs-phd5/blob/master/guide/README.md)
+[Quick start tutorial](http://phd.dmstr.io/en/docs/guide/tutorials/quick-start-planck.md) | [Guide](https://github.com/dmstr/docs-phd5/blob/master/guide/README.md)
 
 ### Getting started
 
