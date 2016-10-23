@@ -46,6 +46,7 @@ Login with `admin` / `admin1`
 - :cd: [Base-image phd5](https://github.com/dmstr/phd5-app)
 - :cd: :credit_card: [Base image phd5-ee](https://git.hrzg.de/hrzg/phd5-ee-app)
 - :green_book: [Documentation](https://github.com/dmstr/docs-phd5/blob/master/README.md)
+
 ---
 
 ### ![dmstr logo](http://t.phundament.com/dmstr-16-cropped.png) Built with [phd](http://phd.dmstr.io) from [dmstr](http://diemeisterei.de)
