@@ -5,7 +5,8 @@ Web application template built from `dmstr/phd5-app`
 
 ## Documentation
 
-[Quick start tutorial](http://phd.dmstr.io/en/docs/guide/tutorials/quick-start-planck.md) | [Guide](https://github.com/dmstr/docs-phd5/blob/master/guide/README.md)
+[Quick start tutorial](http://phd.dmstr.io/en/docs/guide/tutorials/quick-start-planck.md) 
+| [Guide](https://github.com/dmstr/docs-phd5/blob/master/guide/README.md)
 
 ### Getting started
 
@@ -38,6 +39,13 @@ Open your browser
 
 Login with `admin` / `admin1`    
 
+## Resources
+
+- :octocat: [Source-code on GitHub](https://github.com/dmstr/planck)
+- :wolf: [Source-code on git.hrzg.de](https://git.hrzg.de/dmstr/planck)
+- :cd: [Base-image phd5](https://github.com/dmstr/phd5-app)
+- :cd: :credit_card: [Base image phd5-ee](https://git.hrzg.de/hrzg/phd5-ee-app)
+- :green_book: [Documentation](https://github.com/dmstr/docs-phd5/blob/master/README.md)
 ---
 
 ### ![dmstr logo](http://t.phundament.com/dmstr-16-cropped.png) Built with [phd](http://phd.dmstr.io) from [dmstr](http://diemeisterei.de)
