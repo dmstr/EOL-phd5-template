@@ -23,12 +23,13 @@ services:
       # - VIRTUAL_HOST=${VIRTUAL_HOST}
     volumes:
       - ./src/modules:/app/src/modules
-      # Develop with additional packages
+      # Local development overrides for application ENV variables
+      #- ./src/local.env:/app/src/local.env
+      # For composer usage in container; NOTE! There may be performance issues, see also https://github.com/docker/for-mac/issues/77
       #- ~/.composer/cache:/root/.composer/cache
       #- ./composer.json:/app/composer.json
       #- ./composer.lock:/app/composer.lock
       # Debug
-      #- ./src/local.env:/app/src/local.env
       #- ./web/assets:/app/web/assets
       #- ./vendor:/app/vendor
       #- ./runtime:/app/runtime
