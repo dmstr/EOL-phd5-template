@@ -15,12 +15,21 @@ services:
     depends_on:
       - db
     environment:
+      # Database
       - MYSQL_ROOT_PASSWORD=secret
       # For host-volume development (permissions)
       - PHP_USER_ID=1000
       #- GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
       # For usage with https://github.com/jwilder/nginx-proxy
       # - VIRTUAL_HOST=${VIRTUAL_HOST}
+      #
+      # Development settings, set your production defaults in Dockerfile
+      - APP_NAME=dev-planck
+      - APP_TITLE=PlanckDEV
+      - APP_LANGUAGES=en,de,ru
+      # Development ONLY settings, DO NOT set production defaults in Dockerfile
+      - APP_ADMIN_PASSWORD=admin1
+      - APP_MIGRATION_LOOKUP=@app/migrations/demo-data
     volumes:
       - ./src/modules:/app/src/modules
       # Local development overrides for application ENV variables

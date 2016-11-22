@@ -5,14 +5,11 @@ Web application template built from `dmstr/phd5-app`
 
 ## Documentation
 
-[Quick start tutorial](http://phd.dmstr.io/en/docs/guide/tutorials/quick-start-planck.md) 
-| [Guide](https://github.com/dmstr/docs-phd5/blob/master/guide/README.md)
+[Developer guide](http://phd.dmstr.io/en/docs) | [API docs](http://phd.dmstr.io/docs/api) | [Online help](http://phd.dmstr.io/docs/help)
 
 ### Getting started
 
-Update `Dockerfile`.
-
-Create environment config
+Activate development environment by creating a config file for *Docker Compose*
 
     cp .env-dist .env
     
@@ -24,10 +21,7 @@ Build images
     
 Inital setup of application    
 
-    docker-compose run --rm \
-        -e APP_ADMIN_PASSWORD=admin1 \
-        -e APP_MIGRATION_LOOKUP=@app/migrations/demo-data \
-        php yii app/setup
+    docker-compose run --rm php yii app/setup
         
 Start stack
         
@@ -38,6 +32,8 @@ Open your browser
     open http://$DOCKER_HOST_IP:21080
 
 Login with `admin` / `admin1`    
+
+Continue with the [quick start tutorial](http://phd.dmstr.io/en/docs/guide/tutorials/quick-start-planck.md). 
 
 ## Resources
 
