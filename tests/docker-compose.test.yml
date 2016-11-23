@@ -12,6 +12,7 @@ services:
     ports:
       - 80
     depends_on:
+      - db
       - firefox
     environment:
       - YII_ENV=test
