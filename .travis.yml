@@ -15,5 +15,5 @@ before_install:
   - docker-compose up -d
 
 script:
-  - docker-compose run --rm php codecept run
+  - docker-compose run --rm php codecept run cli,unit,functional,e2e
 
