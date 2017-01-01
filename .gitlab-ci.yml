@@ -40,7 +40,7 @@ release:latest:
 release:tags:
   stage: release
   script:
-    - docker-compose push || exit 1
+    - docker push ${STACK_PHP_IMAGE} || exit 1
   only:
     - release
     - tags
