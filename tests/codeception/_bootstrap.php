@@ -9,7 +9,7 @@ require($rootPath.'/src/config/env.php');
 # TODO: review run webserver in YII_ENV=prod for acceptance tests, yii2-localurls has redirect issues in YII_ENV=test, see https://github.com/codemix/yii2-localeurls/issues/62
 if (php_sapi_name() == 'cli' && getenv('YII_ENV') !== 'test') {
     echo "Error: YII_ENV must be set to 'test'\n";
-    exit;
+    exit(1);
 }
 
 defined('YII_DEBUG') or define('YII_DEBUG', true);

@@ -1,12 +1,7 @@
 <?php
 
-use yii\codeception\TestCase;
-
-class ControllerTest extends TestCase
+class ControllerTest extends \Codeception\Test\Unit
 {
-
-    public $appConfig = '@tests/codeception/_config/test.php';
-
     /**
      * @group mandatory
      */
@@ -16,7 +11,8 @@ class ControllerTest extends TestCase
         $this->assertNotNull(Yii::$app);
     }
 
-    public function testController(){
+    public function testController()
+    {
         $this->assertNotFalse(Yii::$app->createController('site/index'));
     }
 }
