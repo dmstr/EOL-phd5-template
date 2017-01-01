@@ -17,6 +17,8 @@ services:
     environment:
       - YII_ENV=test
       - PHP_ENABLE_XDEBUG=${PHP_ENABLE_XDEBUG}
+      - APP_NAME=test-planck
+      - APP_LANGUAGES=de,en,ru,fr
       - APP_CONFIG_FILE=@root/tests/codeception/_config/test.php
       - APP_MIGRATION_LOOKUP=@root/tests/codeception/_migrations/data
       - APP_ADMIN_PASSWORD=admin1
