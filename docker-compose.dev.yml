@@ -46,6 +46,11 @@ services:
       #- ./web/assets:/app/web/assets
       #- ./runtime:/app/runtime
 
+  worker:
+    build: .
+    depends_on:
+      - db
+
   db:
     #command: --character-set-server=utf8 --collation-server=utf8_general_ci
     image: percona:5.7
