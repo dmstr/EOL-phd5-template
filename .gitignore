@@ -2,13 +2,19 @@
 
 .idea
 _artifacts
-
 version
+
+# packages from base-image
+composer.phd5.json
 vendor
+
 runtime
 web/assets
 web/bundles
 
 docker-compose.override.yml
+
+# codeception output & generated files
 tests/codeception/_output
 tests/codeception/_support/_generated
+
