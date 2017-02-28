@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "702f2941860ba488c733d90abc5e161d",
+    "content-hash": "fc809f97d57768cad2dcea94192583c5",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -1946,16 +1946,16 @@
         },
         {
             "name": "creocoder/yii2-flysystem",
-            "version": "0.8.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/creocoder/yii2-flysystem.git",
-                "reference": "9ca837c8ceb1535f722969f6a9cbbcb0f267667a"
+                "reference": "0209d17a68027889a10a9133e4eb11f8dd6333cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/creocoder/yii2-flysystem/zipball/9ca837c8ceb1535f722969f6a9cbbcb0f267667a",
-                "reference": "9ca837c8ceb1535f722969f6a9cbbcb0f267667a",
+                "url": "https://api.github.com/repos/creocoder/yii2-flysystem/zipball/0209d17a68027889a10a9133e4eb11f8dd6333cf",
+                "reference": "0209d17a68027889a10a9133e4eb11f8dd6333cf",
                 "shasum": ""
             },
             "require": {
@@ -1963,7 +1963,7 @@
                 "yiisoft/yii2": "~2.0.0"
             },
             "require-dev": {
-                "league/flysystem-aws-s3-v2": "~1.0",
+                "league/flysystem-aws-s3-v3": "~1.0",
                 "league/flysystem-azure": "~1.0",
                 "league/flysystem-cached-adapter": "~1.0",
                 "league/flysystem-copy": "~1.0",
@@ -2008,7 +2008,7 @@
                 "sftp",
                 "yii2"
             ],
-            "time": "2015-05-12T08:36:25+00:00"
+            "time": "2017-02-08 10:23:22"
         },
         {
             "name": "creocoder/yii2-nested-sets",
@@ -2052,25 +2052,28 @@
         },
         {
             "name": "dektrium/yii2-rbac",
-            "version": "0.3.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dektrium/yii2-rbac.git",
-                "reference": "4c5c383f577256d34cbc37ed26809a8ff109b2ec"
+                "reference": "0943e66c450132b306584a37caefc2aa04258372"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dektrium/yii2-rbac/zipball/4c5c383f577256d34cbc37ed26809a8ff109b2ec",
-                "reference": "4c5c383f577256d34cbc37ed26809a8ff109b2ec",
+                "url": "https://api.github.com/repos/dektrium/yii2-rbac/zipball/0943e66c450132b306584a37caefc2aa04258372",
+                "reference": "0943e66c450132b306584a37caefc2aa04258372",
                 "shasum": ""
             },
             "require": {
-                "kartik-v/yii2-widget-select2": "*",
-                "yiisoft/yii2": "2.0.*"
+                "kartik-v/yii2-widget-select2": "^2.0",
+                "yiisoft/yii2": "^2.0.8"
             },
             "type": "yii2-extension",
             "extra": {
-                "bootstrap": "dektrium\\rbac\\Bootstrap"
+                "bootstrap": "dektrium\\rbac\\Bootstrap",
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
             },
             "autoload": {
                 "psr-4": {
@@ -2098,7 +2101,7 @@
                 "yii2",
                 "yii2-rbac"
             ],
-            "time": "2016-03-30T12:19:16+00:00"
+            "time": "2016-08-15 15:49:54"
         },
         {
             "name": "dektrium/yii2-user",
@@ -8202,9 +8205,24 @@
             "time": "2016-03-18T14:09:46+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "0.3.999",
+            "alias_normalized": "0.3.999.0",
+            "version": "9999999-dev",
+            "package": "dektrium/yii2-rbac"
+        },
+        {
+            "alias": "0.8.999",
+            "alias_normalized": "0.8.999.0",
+            "version": "9999999-dev",
+            "package": "creocoder/yii2-flysystem"
+        }
+    ],
     "minimum-stability": "beta",
     "stability-flags": {
+        "dektrium/yii2-rbac": 20,
+        "creocoder/yii2-flysystem": 20,
         "dmstr/yii2-libs-metapackage": 10,
         "ckeditor/ckeditor": 20,
         "roave/security-advisories": 20
