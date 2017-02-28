@@ -1,6 +1,12 @@
 # see also https://docs.gitlab.com/ce/ci/variables/README.html
+stages:
+  - build
+  - test
+  - release
+  - cleanup
+
 before_script:
-  - export ISOLATION=buildpipeline${CI_PIPELINE_ID}
+  - export ISOLATION=buildpipeline${CI_PIPELINE_ID}${CI_BUILD_NAME}
   - export APP_VERSION=$(git describe --always --dirty)
   - export STACK_PHP_IMAGE=${REGISTRY_HOST}/${CI_PROJECT_PATH}/php:${APP_VERSION}
   - export STACK_PHP_IMAGE_LATEST=${REGISTRY_HOST}/${CI_PROJECT_PATH}/php:latest
@@ -8,21 +14,14 @@ before_script:
   - cd tests
   - cp .env-dist .env
 
-stages:
-  - build
-  - test
-  - release
-  - cleanup
-
-build:
-  stage: build
-  script:
-    - docker-compose build --pull
+after_script:
+  - docker-compose down -v
 
 test:
   stage: test
   script:
-    - docker-compose up -d
+    - docker-compose build --pull
+    - docker-compose up -d --build
     - docker-compose run --rm php codecept run cli,unit,functional,e2e
   artifacts:
     paths:
@@ -36,6 +35,8 @@ release:latest:
     - docker push ${STACK_PHP_IMAGE_LATEST} || exit 1
   only:
     - latest
+    - release
+    - tags
 
 release:tags:
   stage: release
@@ -44,10 +45,3 @@ release:tags:
   only:
     - release
     - tags
-
-cleanup:
-  stage: cleanup
-  script:
-    - docker-compose kill
-    - docker-compose down -v
-  when: always
