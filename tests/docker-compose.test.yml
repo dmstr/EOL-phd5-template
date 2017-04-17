@@ -7,7 +7,6 @@ version: '2'
 services:
   php:
     build: .
-    image: ${STACK_PHP_IMAGE}
     working_dir: /app/tests
     ports:
       - 80
@@ -26,7 +25,7 @@ services:
       - APP_INTERACTIVE=0
       - APP_ASSET_USE_BUNDLED=1
       - APP_ASSET_FORCE_PUBLISH=0
-      - MYSQL_ROOT_PASSWORD=secret
+      - DB_ENV_MYSQL_ROOT_PASSWORD=secret
     volumes:
       - ./tests:/app/tests
       # Settings for local test-development
@@ -39,7 +38,7 @@ services:
         aliases:
           - web
   worker:
-    image: ${STACK_PHP_IMAGE}
+    build: .
   db:
     image: percona:5.6
     environment:

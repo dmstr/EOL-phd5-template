@@ -1,0 +1,11 @@
+# Local stack overrides
+#
+# Variables are populated with values from `.env`
+#
+version: '2'
+services:
+
+  php:
+    volumes:
+      # Application packages
+      #- ./vendor:/app/vendor

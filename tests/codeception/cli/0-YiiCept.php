@@ -16,5 +16,5 @@ $I->seeInShellOutput('- db');
 $I->seeInShellOutput('app/setup');
 $I->seeInShellOutput('user/create');
 
-$I->runShellCommand('yii app/show-env');
-$I->runShellCommand('yii app/show-config');
+$I->runShellCommand('yii app/env');
+$I->runShellCommand('yii app/config');

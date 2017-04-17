@@ -8,8 +8,11 @@ $I = new FunctionalTester($scenario);
 
 $I->wantTo('check application versioning');
 
-$I->dontSeeFileFound('version', $rootPath);
-$I->seeFileFound('version', $rootPath.'/src');
+$I->amInPath($rootPath);
+$I->dontSeeFileFound('version');
+
+$I->amInPath($rootPath.'/src');
+$I->seeFileFound('version');
 
 $I->openFile($rootPath.'/src/version');
 
