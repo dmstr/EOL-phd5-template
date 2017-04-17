@@ -9,3 +9,6 @@ services:
     volumes:
       # Application packages
       #- ./vendor:/app/vendor
+      # Debug
+      #- ./web/assets:/app/web/assets
+      #- ./runtime:/app/runtime

@@ -2488,16 +2488,16 @@
         },
         {
             "name": "dmstr/yii2-db",
-            "version": "0.8.10",
+            "version": "0.8.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dmstr/yii2-db.git",
-                "reference": "5ab7540e47265d3303d5002b8cadaebc881ebc46"
+                "reference": "5eed0fbb0c713ed651fedc0b827b40fb7414134c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dmstr/yii2-db/zipball/5ab7540e47265d3303d5002b8cadaebc881ebc46",
-                "reference": "5ab7540e47265d3303d5002b8cadaebc881ebc46",
+                "url": "https://api.github.com/repos/dmstr/yii2-db/zipball/5eed0fbb0c713ed651fedc0b827b40fb7414134c",
+                "reference": "5eed0fbb0c713ed651fedc0b827b40fb7414134c",
                 "shasum": ""
             },
             "require": {
@@ -2530,7 +2530,7 @@
                 "extension",
                 "yii2"
             ],
-            "time": "2017-04-03T14:11:46+00:00"
+            "time": "2017-04-17T22:33:01+00:00"
         },
         {
             "name": "dmstr/yii2-filefly-module",
