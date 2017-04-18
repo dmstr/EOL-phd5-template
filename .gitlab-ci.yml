@@ -40,8 +40,6 @@ release:latest:
     - docker push ${STACK_PHP_IMAGE_LATEST} || exit 1
   only:
     - latest
-    - release
-    - tags
 
 release:tags:
   stage: release
