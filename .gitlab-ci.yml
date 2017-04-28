@@ -25,9 +25,7 @@ after_script:
 test:
   stage: test
   script:
-    - docker-compose build --pull
-    - docker-compose up -d --build
-    - docker-compose run --rm php codecept run cli,unit,functional,e2e
+    - make all run-tests
   artifacts:
     paths:
       - tests/codeception/_output
