@@ -15,6 +15,7 @@ services:
       - 21080:80
     depends_on:
       - db
+      - redis
       - mailcatcher
     environment:
       # Database
@@ -35,8 +36,8 @@ services:
     volumes:
       # Application source-code
       - ./src/modules:/app/src/modules
-      # Local development overrides for application ENV variables; NOTE: You need to create the file _before_ enabling the volume
-      #- ./src/local.env:/app/src/local.env
+      # Vendor source-code
+      - ./vendor:/app/vendor
       # For composer usage in container; NOTE! There may be performance issues, see also https://github.com/docker/for-mac/issues/77
       - ~/.composer/cache:/root/.composer/cache
       - ./composer.json:/app/composer.json

@@ -6,9 +6,7 @@ version: '2'
 services:
 
   php:
-    volumes:
-      # Application packages
-      #- ./vendor:/app/vendor
+    #volumes:
       # Debug
       #- ./web/assets:/app/web/assets
       #- ./runtime:/app/runtime

@@ -1,23 +1,7 @@
-planck
-======
+phd5-template
+=============
 
-Super-minimalistic web application template built upon *phd5*.
-
-## What is this?
-
-The *planck* template contains a development environment for building and testing web applications with Docker, PHP and Yii 2.0 Framework. 
-
-It follows a strictly modular approach, which means that custom source-code added to a *planck* application does not interfere
-with the sources contained on the *phd5* base-image, which features a full-featured application platform.
-
-Compare to other web application templates a *planck* template does not contain the full-source code of the application.
-Which makes it super-small, in fact the only source-code contained by default is an empty array - the place to add your custom
-configuration.
-
-A key feature of *planck* is that its base application image can be updated. Therefore it is possible to deliver fixes 
-or security updates for the underlying application. It also makes the process of creating your custom tailed application template
-very easy.
-
+Web application template built upon `dmstr/phd5-app`.
 
 ## Requirements
 

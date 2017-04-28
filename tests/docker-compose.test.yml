@@ -12,8 +12,9 @@ services:
       - 80
     depends_on:
       - db
-      - firefox
+      - redis
       - mailcatcher
+      - firefox
     environment:
       - YII_ENV=test
       - PHP_ENABLE_XDEBUG=${PHP_ENABLE_XDEBUG}

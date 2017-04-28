@@ -3,22 +3,20 @@
 include ./Makefile.base
 
 all:    ##@development shorthand for 'build init up setup open'
-all: init build dev up setup open
-
-dev: up setup open   ##@development shorthand for 'up setup open'
-dev:
-	$(DOCKER_COMPOSE) run --rm php composer install
+all: init build up setup open
 
 init:   ##@development initialize development environment
 	cp -n .env-dist .env &2>/dev/null
 	cp -n tests/.env-dist tests/.env &2>/dev/null
 	touch src/local.env &2>/dev/null
+	$(DOCKER_COMPOSE) run --rm php composer install
 	mkdir -p web/assets runtime
 
 bash:	 ##@development open application development bash
 	$(DOCKER_COMPOSE) run --rm php bash
 
-upgrade: ##@development update application package, pull, rebuild
+dist-upgrade: ##@development update application package, pull, rebuild
+	$(DOCKER_COMPOSE) build --pull
 	$(DOCKER_COMPOSE) run --rm php composer update -v
 	$(DOCKER_COMPOSE) build --pull
 
