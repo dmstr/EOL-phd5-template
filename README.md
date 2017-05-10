@@ -19,7 +19,7 @@ This setting will load and merge `docker-compose.dev.yml` with the default confi
 
     cp .env-dist .env
     
-> :bulb: It is also recommended to create an environment config for the **application** under `src/local.env`, this file can be used later to change
+> :bulb: It is also recommended to create an environment config for the **application** under `src/modules/local.env`, this file can be used later to change
 environment settings during development.    
 
 Build your images
