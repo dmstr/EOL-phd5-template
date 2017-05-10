@@ -6,11 +6,7 @@ version: '2'
 services:
 
   php:
-    build:
-      dockerfile: Dockerfile
-      context: .
-      #args:
-      #  - GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
+    build: .
     ports:
       - 21080:80
     depends_on:
@@ -19,20 +15,21 @@ services:
       - mailcatcher
     environment:
       # Database
-      - MYSQL_ROOT_PASSWORD=secret
-      # For host-volume development (permissions)
-      - PHP_USER_ID=1000
-      #- GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
-      #
+      - DB_ENV_MYSQL_ROOT_PASSWORD=secret
+
       # Development settings, set your production defaults in Dockerfile
+      - ENV_LOCAL_FILE=modules/local.env
+      #- GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
+
       - APP_NAME=dev-planck
       - APP_TITLE=PlanckDEV
       - APP_LANGUAGES=en,de,ru
+
       # Development ONLY settings, DO NOT set production defaults for these values in Dockerfile
       - APP_ADMIN_PASSWORD=admin1
       - APP_ADMIN_EMAIL=admin@test.local
       - APP_MIGRATION_LOOKUP=@app/migrations/demo-data
-      - DB_ENV_MYSQL_ROOT_PASSWORD=secret
+
     volumes:
       # Application source-code
       - ./src/modules:/app/src/modules

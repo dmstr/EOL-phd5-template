@@ -5,8 +5,6 @@ services:
         - redis
     worker:
       command: 'yii resque/work "*"'
-      volumes_from:
-        - php
       depends_on:
         - redis
     redis:
