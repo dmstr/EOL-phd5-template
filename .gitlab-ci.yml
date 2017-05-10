@@ -6,7 +6,7 @@ stages:
   - cleanup
 
 before_script:
-  - export COMPOSE_PROJECT_NAME=${ISOLATION}${CI_BUILD_NAME}
+  - export COMPOSE_PROJECT_NAME=buildpipeline${CI_PIPELINE_ID}${CI_BUILD_NAME}
   - export APP_VERSION=$(git describe --always --dirty)
   - export STACK_PHP_IMAGE=${REGISTRY_HOST}/${CI_PROJECT_PATH}/php:${APP_VERSION}
   - export STACK_PHP_IMAGE_LATEST=${REGISTRY_HOST}/${CI_PROJECT_PATH}/php:latest
@@ -17,7 +17,7 @@ before_script:
 
 after_script:
   # set docker-compose isolation
-  - export COMPOSE_PROJECT_NAME=${ISOLATION}${CI_BUILD_NAME}
+  - export COMPOSE_PROJECT_NAME=buildpipeline${CI_PIPELINE_ID}${CI_BUILD_NAME}
   - cd tests
   - cp .env-dist .env
   - docker-compose down -v
