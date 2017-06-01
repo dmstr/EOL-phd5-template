@@ -2,7 +2,8 @@ FROM dmstr/phd5-app:5.0.0-beta38
 
 ENV APP_NAME=dev-planck \
     APP_TITLE=PlanckDEV \
-    APP_LANGUAGES=en,de,ru
+    APP_LANGUAGES=en,de,ru \
+    APP_CONFIG_FILE=/app/src/modules/config.php
 
 # Additional packages, see also `docker-compose.dev.yml` for host-volumes
 COPY ./composer.* /app/
