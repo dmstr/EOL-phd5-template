@@ -26,6 +26,10 @@ Build your images
 
     docker-compose build
     
+Install `vendor` packages for development on the host-system (eg. for auto-completion and debugging)
+
+    docker-compose run --rm php composer install
+
 Before starting the stack, we run a one-off command to do the initial setup of the application.     
 
 > :exclamation: There are defaults for setting up an admin user and adding demo-data to the application, you can customize these settings `docker-compose.dev.yml`.
@@ -36,7 +40,7 @@ When the initial setup is complete, you can start the application stack with
         
     docker-compose up -d
 
-You can access the application now in your browser
+You can access the application now in your browser (replace `docker.local` with the IP of your Docker host)
  
     open http://docker.local:21080
 
