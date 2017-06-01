@@ -18,8 +18,6 @@ endif
 default: help
 
 build:   ##@development build images in test-stack
-	$(shell echo $(shell git describe --long --tags --dirty --always) > ../src/version)
-	@echo $(shell cat ../src/version)
 	$(DOCKER_COMPOSE) build --pull
 
 up:      ##@development start stack

@@ -21,10 +21,6 @@ services:
       - ENV_LOCAL_FILE=modules/local.env
       #- GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
 
-      - APP_NAME=dev-planck
-      - APP_TITLE=PlanckDEV
-      - APP_LANGUAGES=en,de,ru
-
       # Development ONLY settings, DO NOT set production defaults for these values in Dockerfile
       - APP_ADMIN_PASSWORD=admin1
       - APP_ADMIN_EMAIL=admin@test.local
