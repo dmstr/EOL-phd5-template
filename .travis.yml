@@ -1,11 +1,29 @@
+dist: trusty
 sudo: required
 
-language: php
+language: generic
 
 services:
   - docker
 
+matrix:
+  include:
+   - env: CODECEPTION_SUITE=mandatory
+   - env: CODECEPTION_SUITE=essential
+  allow_failures:
+   - env: CODECEPTION_SUITE=essential
+
+env:
+  global:
+    - DOCKER_COMPOSE_VERSION=1.13.0
+
 before_install:
+  - sudo rm /usr/local/bin/docker-compose || true
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+before_script:
   - export APP_VERSION=$(git describe --always --dirty)
   - export STACK_PHP_IMAGE=${TRAVIS_REPO_SLUG}:${APP_VERSION}
   - export STACK_PHP_IMAGE_LATEST=${TRAVIS_REPO_SLUG}:latest
@@ -15,5 +33,4 @@ before_install:
   - docker-compose up -d
 
 script:
-  - docker-compose run --rm php codecept run cli,unit,functional,e2e
-
+  - docker-compose run --rm php codecept run cli,unit,functional,e2e -g $CODECEPTION_SUITE
