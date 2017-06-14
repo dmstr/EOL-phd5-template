@@ -27,8 +27,6 @@ coverage:
     whitelist:
         include:
             - ../src/*.php
-            - ../vendor/dmstr/*.php
-            - ../vendor/hrzg/*.php
         exclude:
             - ../src/commands/*
             - ../src/migrations/*
