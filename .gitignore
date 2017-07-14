@@ -16,6 +16,6 @@ web/bundles
 docker-compose.override.yml
 
 # codeception output & generated files
-tests/codeception/_output
-tests/codeception/_support/_generated
+tests-modules/codeception/_output
+tests-modules/codeception/_support/_generated
 
