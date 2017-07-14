@@ -1,4 +1,4 @@
-.PHONY: build test
+.PHONY: default help build up clean open open-db setup
 
 DOCKER_COMPOSE  ?= docker-compose
 DOCKER_HOST     ?= localhost

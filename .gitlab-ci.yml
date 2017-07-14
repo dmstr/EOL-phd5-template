@@ -31,6 +31,15 @@ test:
       - tests/codeception/_output
     when: always
 
+lint:
+  stage: test
+  script:
+    - make lint
+  artifacts:
+    paths:
+      - tests/codeception/_output
+    when: always
+
 release:latest:
   stage: release
   script:
