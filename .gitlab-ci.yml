@@ -6,6 +6,7 @@ stages:
   - cleanup
 
 before_script:
+  - echo $CI_SERVER_NAME
   - export COMPOSE_PROJECT_NAME=buildpipeline${CI_PIPELINE_ID}${CI_BUILD_NAME}
   - export APP_VERSION=$(git describe --always --dirty)
   - export STACK_PHP_IMAGE=${REGISTRY_HOST}/${CI_PROJECT_PATH}/php:${APP_VERSION}
