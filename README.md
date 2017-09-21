@@ -60,4 +60,4 @@ Continue with the [quick start tutorial](http://phd.dmstr.io/en/docs/guide/tutor
 
 ---
 
-### ![dmstr logo](http://t.phundament.com/dmstr-16-cropped.png) Built with [phd](http://phd.dmstr.io) from [dmstr](http://diemeisterei.de)
+### ![dmstr logo](https://t.phundament.com/dmstr-16-cropped.png) Built with [phd](http://phd.dmstr.io) from [dmstr](http://diemeisterei.de)
