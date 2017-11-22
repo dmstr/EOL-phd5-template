@@ -36,10 +36,10 @@ open-mailcatcher: ##@test open mail testing service in browser
 	$(OPEN_CMD) http://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port mailcatcher 1080 | sed 's/[0-9.]*://')
 
 open-report: ##@test open HTML reports
-	$(OPEN_CMD) codeception/_output/_report.html
+	$(OPEN_CMD) _log/_report.html
 
 open-coverage: ##@test open HTML reports
-	$(OPEN_CMD) codeception/_output/coverage/index.html
+	$(OPEN_CMD) _log/coverage/index.html
 
 open-c3:
 	$(OPEN_CMD) http://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port web 80 | sed 's/[0-9.]*://')/c3/report/clear
