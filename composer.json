@@ -1,8 +1,8 @@
 {
     "name": "dmstr/phd5-template",
-    "minimum-stability": "beta",
+    "minimum-stability": "stable",
     "require": {
-        "wikimedia/composer-merge-plugin": "~1.3.1"
+        "wikimedia/composer-merge-plugin": "~1.4"
     },
     "extra": {
         "merge-plugin": {
@@ -27,7 +27,8 @@
                 "github-no-api": true
             },
             "git-skip-update": "2 days",
-            "pattern-skip-version": "(-build|-patch)"
+            "pattern-skip-version": "(-build|-patch)",
+            "optimize-with-installed-packages": false
         }
     }
 }

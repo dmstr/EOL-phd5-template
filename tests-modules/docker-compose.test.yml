@@ -21,7 +21,7 @@ services:
       - PHP_ENABLE_XDEBUG=${PHP_ENABLE_XDEBUG}
       - APP_INTERACTIVE=0
       - APP_CONFIG_FILE=@root/tests-modules/codeception/_config/test.php
-      - APP_MIGRATION_LOOKUP=@root/tests/codeception/_migrations/data
+      - APP_MIGRATION_LOOKUP=@root/tests-modules/codeception/_migrations/data
       - APP_ADMIN_PASSWORD=admin1
       - APP_ADMIN_EMAIL=admin@test.local
       - APP_ASSET_USE_BUNDLED=1

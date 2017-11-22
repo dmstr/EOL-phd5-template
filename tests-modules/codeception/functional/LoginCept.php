@@ -29,9 +29,7 @@ $I->seeResponseCodeIs(200);
 
 $I->expectTo('see backend elements');
 $I->see('admin');
-$I->see('Widget Content','h4');
-$I->see('Pages','h4');
-$I->see('Application Settings','h4');
+$I->see('test','h3');
 $I->see('Auto-detected modules', 'h3');
 $I->see('filefly','a.btn-app');
 $I->see('redirects','a.btn-app');
