@@ -16,6 +16,7 @@ matrix:
 env:
   global:
     - DOCKER_COMPOSE_VERSION=1.13.0
+    - STACK_PHP_IMAGE=testing/phd5-template
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose || true
