@@ -8,7 +8,7 @@ services:
   php:
     build: .
     image: ${STACK_PHP_IMAGE}
-    working_dir: /app/tests-modules
+    working_dir: /app/project/tests
     ports:
       - 80
     depends_on:
@@ -20,15 +20,15 @@ services:
       - YII_ENV=test
       - PHP_ENABLE_XDEBUG=${PHP_ENABLE_XDEBUG}
       - APP_INTERACTIVE=0
-      - APP_CONFIG_FILE=@root/tests-modules/codeception/_config/test.php
-      - APP_MIGRATION_LOOKUP=@root/tests-modules/codeception/_migrations/data
+      - APP_CONFIG_FILE=/app/project/tests/codeception/_config/test.php
+      - APP_MIGRATION_LOOKUP=/app/project/tests/codeception/_migrations/data
       - APP_ADMIN_PASSWORD=admin1
       - APP_ADMIN_EMAIL=admin@test.local
       - APP_ASSET_USE_BUNDLED=1
       - APP_ASSET_FORCE_PUBLISH=0
       - DB_ENV_MYSQL_ROOT_PASSWORD=secret
-    volumes:
-      - ./tests-modules:/app/tests-modules
+    #volumes:
+      #- ./tests-modules:/app/tests-modules
       # Settings for local test-development
       #- ./runtime:/app/runtime
       #- ./src:/app/src

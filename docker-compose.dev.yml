@@ -18,7 +18,7 @@ services:
       - DB_ENV_MYSQL_ROOT_PASSWORD=secret
 
       # Development settings, set your production defaults in Dockerfile
-      - ENV_LOCAL_FILE=modules/local.env
+      - ENV_LOCAL_FILE=../project/config/local.env
       #- GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
 
       # Development ONLY settings, DO NOT set production defaults for these values in Dockerfile
@@ -28,7 +28,7 @@ services:
 
     volumes:
       # Application source-code
-      - ./src/modules:/app/src/modules:cached
+      - ./project/:/app/project:cached
       # Vendor source-code
       - ./vendor:/app/vendor:delegated
       # For composer usage in container; NOTE! There may be performance issues, see also https://github.com/docker/for-mac/issues/77

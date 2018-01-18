@@ -1,6 +1,6 @@
 CODECEPTION_GROUP ?= mandatory
 
-include ../Makefile.base
+include ../../Makefile.base
 
 all: ##@test [TEST] shorthand for
 	$(MAKE) init-tests version build
@@ -9,7 +9,6 @@ all: ##@test [TEST] shorthand for
 init-tests:
 	mkdir -p _log/codeception && chmod -R 777 _log/codeception
 	mkdir -p _log/lint && chmod -R 777 _log/lint
-	mkdir -p ../_test-volumes/storage/fs-local && chmod -R 777 ../_test-volumes/storage/fs-local
 
 version:
 	$(shell echo $(shell git describe --long --tags --dirty --always) > ../src/version)

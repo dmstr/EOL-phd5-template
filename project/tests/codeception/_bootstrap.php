@@ -1,7 +1,7 @@
 <?php
 // This is global bootstrap for autoloading
 
-$rootPath = __DIR__.'/../..';
+$rootPath = __DIR__.'/../../..';
 
 require($rootPath.'/vendor/autoload.php');
 require($rootPath.'/src/config/env.php');
