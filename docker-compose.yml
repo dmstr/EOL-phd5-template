@@ -3,9 +3,5 @@ services:
     php:
       depends_on:
         - redis
-    worker:
-      command: 'yii resque/work "*"'
-      depends_on:
-        - redis
     redis:
         image: redis:3
