@@ -27,8 +27,8 @@ services:
       - APP_ASSET_USE_BUNDLED=1
       - APP_ASSET_FORCE_PUBLISH=0
       - DB_ENV_MYSQL_ROOT_PASSWORD=secret
-    #volumes:
-      #- ./tests-modules:/app/tests-modules
+    volumes:
+      - ./project/tests:/app/project/tests
       # Settings for local test-development
       #- ./runtime:/app/runtime
       #- ./src:/app/src

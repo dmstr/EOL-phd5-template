@@ -11,8 +11,8 @@ init-tests:
 	mkdir -p _log/lint && chmod -R 777 _log/lint
 
 version:
-	$(shell echo $(shell git describe --long --tags --dirty --always) > ../src/version)
-	@echo $(shell cat ../src/version)
+	$(shell echo $(shell git describe --long --tags --dirty --always) > ../version)
+	@echo $(shell cat ../version)
 
 bash: ##@development open application development bash
 	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test php bash
