@@ -1,4 +1,4 @@
-FROM dmstr/phd5-app:5.1.0-rc4-debian
+FROM dmstr/phd5-app:5.1.0-rc6-debian
 
 # Environment settings for application image, Note: These settings can NOT be changed in local override files like `src/modules/local.env`
 ENV APP_NAME=dev-planck \
