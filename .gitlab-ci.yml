@@ -19,7 +19,7 @@ before_script:
 after_script:
   # set docker-compose isolation
   - export COMPOSE_PROJECT_NAME=buildpipeline${CI_PIPELINE_ID}${CI_BUILD_NAME}
-  - cd tests-modules
+  - cd project/tests
   - cp .env-dist .env
   - docker-compose down -v
 
