@@ -14,17 +14,10 @@ services:
       - redis
       - mailcatcher
     environment:
-      # Database
+      # Development ONLY settings
       - DB_ENV_MYSQL_ROOT_PASSWORD=secret
-
-      # Development settings, set your production defaults in Dockerfile
+      - GITHUB_API_TOKEN
       - ENV_LOCAL_FILE=../project/config/local.env
-      #- GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
-
-      # Development ONLY settings, DO NOT set production defaults for these values in Dockerfile
-      - APP_ADMIN_PASSWORD=admin1
-      - APP_ADMIN_EMAIL=admin@test.local
-      - APP_MIGRATION_LOOKUP=@app/migrations/demo-data
 
     volumes:
       # Application source-code
