@@ -25,6 +25,7 @@ services:
       - APP_ADMIN_PASSWORD=admin1
       - APP_ADMIN_EMAIL=admin@test.local
       - APP_MIGRATION_LOOKUP=@app/migrations/demo-data
+      - APP_MAILER_USE_FILE_TRANSPORT=1
 
     volumes:
       # Application source-code

@@ -7,6 +7,7 @@ all: ##@test [TEST] shorthand for
 	$(MAKE) clean up setup
 
 init-tests:
+	cp -n .env-dist .env &2>/dev/null
 	mkdir -p _log/codeception && chmod -R 777 _log/codeception
 	mkdir -p _log/lint && chmod -R 777 _log/lint
 
