@@ -5,6 +5,7 @@
 
 version: '2.1'
 services:
+
   php:
     build: .
     working_dir: /app/project/tests
@@ -28,23 +29,18 @@ services:
       - APP_ASSET_FORCE_PUBLISH=0
     volumes:
       - ./project/tests:/app/project/tests
-      # Settings for local test-development
-      #- ./runtime:/app/runtime
-      #- ./src:/app/src
-      #- ./web:/app/web
-      #- ./vendor:/app/vendor
     networks:
       default:
         aliases:
           - web
-  worker:
-    build: .
+
   db:
     image: percona:5.6
     environment:
       - MYSQL_ROOT_PASSWORD=secret
     ports:
       - '3306'
+
   firefox:
     image: selenium/standalone-firefox-debug:2.53.0
     # workaround for Docker Beta, see https://github.com/SeleniumHQ/docker-selenium/issues/227#issuecomment-224865735
@@ -54,6 +50,7 @@ services:
     ports:
       - '4444'
       - '5900'
+
   mailcatcher:
     image: nisenabe/mailcatcher
     ports:
