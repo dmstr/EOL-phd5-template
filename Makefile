@@ -7,7 +7,8 @@ all: init build up setup open
 
 init:   ##@development initialize development environment
 	cp -n .env-dist .env &2>/dev/null
-	touch project/config/local.env &2>/dev/null
+	cp -n project/tests/.env-dist project/tests/.env &2>/dev/null
+	cp -n project/config/local.env-dist project/config/local.env &2>/dev/null
 	$(DOCKER_COMPOSE) run --rm php composer install
 	mkdir -p web/assets runtime
 

@@ -2,7 +2,7 @@
 #
 # Variables are populated with values from `.env`
 #
-version: '2.1'
+version: '2'
 services:
 
   php:
@@ -14,18 +14,10 @@ services:
       - redis
       - mailcatcher
     environment:
-      # Database
+      # Development ONLY settings
       - DB_ENV_MYSQL_ROOT_PASSWORD=secret
-
-      # Development settings, set your production defaults in Dockerfile
+      - GITHUB_API_TOKEN
       - ENV_LOCAL_FILE=../project/config/local.env
-      #- GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
-
-      # Development ONLY settings, DO NOT set production defaults for these values in Dockerfile
-      - APP_ADMIN_PASSWORD=admin1
-      - APP_ADMIN_EMAIL=admin@test.local
-      - APP_MIGRATION_LOOKUP=@app/migrations/demo-data
-      - APP_MAILER_USE_FILE_TRANSPORT=1
 
     volumes:
       # Application source-code
@@ -36,6 +28,11 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./composer.json:/app/composer.json:cached
       - ./composer.lock:/app/composer.lock:cached
+
+  worker:
+    build: .
+    depends_on:
+      - db
 
   db:
     #command: --character-set-server=utf8 --collation-server=utf8_general_ci

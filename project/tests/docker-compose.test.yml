@@ -16,8 +16,9 @@ services:
       - mailcatcher
       - firefox
     environment:
+      - DB_ENV_MYSQL_ROOT_PASSWORD=secret
+      - PHP_ENABLE_XDEBUG
       - YII_ENV=test
-      - PHP_ENABLE_XDEBUG=${PHP_ENABLE_XDEBUG}
       - APP_INTERACTIVE=0
       - APP_CONFIG_FILE=/app/project/tests/codeception/_config/test.php
       - APP_MIGRATION_LOOKUP=/app/project/tests/codeception/_migrations/data
@@ -25,7 +26,6 @@ services:
       - APP_ADMIN_EMAIL=admin@test.local
       - APP_ASSET_USE_BUNDLED=1
       - APP_ASSET_FORCE_PUBLISH=0
-      - DB_ENV_MYSQL_ROOT_PASSWORD=secret
     volumes:
       - ./project/tests:/app/project/tests
       # Settings for local test-development
