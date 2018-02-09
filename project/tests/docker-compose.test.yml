@@ -3,11 +3,10 @@
 #
 # Paths in this file are relative to the project root
 
-version: '2'
+version: '2.1'
 services:
   php:
     build: .
-    image: ${STACK_PHP_IMAGE}
     working_dir: /app/project/tests
     ports:
       - 80

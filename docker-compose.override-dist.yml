@@ -2,11 +2,11 @@
 #
 # Variables are populated with values from `.env`
 #
-version: '2'
+version: '2.1'
 services:
 
   php:
-    #volumes:
+    volumes:
       # Debug
       #- ./web/assets:/app/web/assets
-      #- ./runtime:/app/runtime
+      - ./runtime:/app/runtime
