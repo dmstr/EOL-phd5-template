@@ -1,7 +1,6 @@
 version: '2.1'
 services:
     php:
-      image: "${STACK_PHP_IMAGE:-local/namespace/project}"
       depends_on:
         - redis
     redis:

@@ -7,10 +7,14 @@ stages:
 
 before_script:
   - echo $CI_SERVER_NAME
-  - export COMPOSE_PROJECT_NAME=buildpipeline${CI_PIPELINE_ID}${CI_BUILD_NAME}
+  # create sanitized project name
+  - export COMPOSE_PROJECT_NAME=$(echo "buildpipeline${CI_PIPELINE_ID}${CI_BUILD_NAME}"  | tr -dc '[:alnum:]\n\r' | tr '[:upper:]' '[:lower:]')
   - export APP_VERSION=$(git describe --always --dirty)
+  # define image names for local builds and repository
+  - export BUILD_PHP_IMAGE=${COMPOSE_PROJECT_NAME}_php
   - export STACK_PHP_IMAGE=${REGISTRY_HOST}/${CI_PROJECT_PATH}/php:${APP_VERSION}
   - export STACK_PHP_IMAGE_LATEST=${REGISTRY_HOST}/${CI_PROJECT_PATH}/php:latest
+
   - cd project/tests
   - cp .env-dist .env
   # ensure a Docker image with correct version exists
@@ -44,7 +48,7 @@ lint:
 release:latest:
   stage: release
   script:
-    - docker tag ${STACK_PHP_IMAGE} ${STACK_PHP_IMAGE_LATEST}
+    - docker tag ${BUILD_PHP_IMAGE} ${STACK_PHP_IMAGE_LATEST}
     - docker push ${STACK_PHP_IMAGE_LATEST} || exit 1
   only:
     - latest
@@ -52,6 +56,7 @@ release:latest:
 release:tags:
   stage: release
   script:
+    - docker tag ${BUILD_PHP_IMAGE} ${STACK_PHP_IMAGE}
     - docker push ${STACK_PHP_IMAGE} || exit 1
   only:
     - release
