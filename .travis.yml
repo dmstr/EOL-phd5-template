@@ -27,7 +27,7 @@ before_install:
 before_script:
   - cd project/tests
   - cp .env-dist .env
-  - make version build up setup
+  - make all
 
 script:
   - make run-tests
