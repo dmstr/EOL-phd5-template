@@ -9,7 +9,7 @@ before_script:
   - echo $CI_SERVER_NAME
   # create sanitized project name
   - export COMPOSE_PROJECT_NAME=$(echo "buildpipeline${CI_PIPELINE_ID}${CI_BUILD_NAME}"  | tr -dc '[:alnum:]\n\r' | tr '[:upper:]' '[:lower:]')
-  - export APP_VERSION=$(git describe --always --dirty)
+  - export APP_VERSION=$(git describe --always --dirty --tags)
   # define image names for local builds and repository
   - export BUILD_PHP_IMAGE=${COMPOSE_PROJECT_NAME}_php
   - export STACK_PHP_IMAGE=${REGISTRY_HOST}/${CI_PROJECT_PATH}/php:${APP_VERSION}
