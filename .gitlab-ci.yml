@@ -33,7 +33,7 @@ test:
     - make all run-tests
   artifacts:
     paths:
-      - tests-modules/codeception/_log
+      - project/tests/codeception/_log
     when: always
 
 lint:
@@ -42,7 +42,7 @@ lint:
     - make lint
   artifacts:
     paths:
-      - tests-modules/codeception/_log
+      - project/tests/codeception/_log
     when: always
 
 release:latest:
