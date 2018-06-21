@@ -8,6 +8,7 @@ version
 # packages from base-image
 composer.phd5.json
 vendor
+vendor-dev
 
 runtime
 web/assets

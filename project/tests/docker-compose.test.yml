@@ -29,6 +29,7 @@ services:
       - APP_ASSET_FORCE_PUBLISH=0
     volumes:
       - ./project/tests:/app/project/tests
+      - ./vendor-dev:/app/vendor
     networks:
       default:
         aliases:

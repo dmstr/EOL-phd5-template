@@ -1,4 +1,5 @@
 CODECEPTION_GROUP ?= mandatory
+TESTER_SERVICE    ?= php
 
 include ../../Makefile.base
 
@@ -6,10 +7,11 @@ all: ##@test [TEST] shorthand for
 	$(MAKE) init-tests version build
 	$(MAKE) clean up setup
 
-init-tests:
+init-tests: ##@development initialize test-environment
 	cp -n .env-dist .env &2>/dev/null
-	mkdir -p _log/codeception && chmod -R 777 _log/codeception
-	mkdir -p _log/lint && chmod -R 777 _log/lint
+	mkdir -p _log/codeception && chmod 777 _log/codeception
+	mkdir -p _log/lint && chmod 777 _log/lint
+	$(DOCKER_COMPOSE) run -w /app --rm $(TESTER_SERVICE) composer install
 
 version:
 	$(shell echo $(shell git describe --long --tags --dirty --always) > ../version)
