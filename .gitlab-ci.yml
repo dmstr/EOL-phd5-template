@@ -27,13 +27,22 @@ after_script:
   - cp .env-dist .env
   - docker-compose down -v
 
-test:
+test:project:
   stage: test
   script:
     - make all run-tests
   artifacts:
     paths:
       - project/tests/codeception/_log
+    when: always
+
+test:app:
+  stage: test
+  script:
+    - make all run-tests-app
+  artifacts:
+    paths:
+      - app/tests/codeception/_log
     when: always
 
 lint:

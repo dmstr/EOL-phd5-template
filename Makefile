@@ -18,10 +18,10 @@ bash:	 ##@development open application development bash
 upgrade: ##@development update application packages
 	$(DOCKER_COMPOSE) run --rm php composer update -v
 
-dist-upgrade: ##@development update application packages after base-image update, rebuild
-	$(DOCKER_COMPOSE) build --pull
-	$(DOCKER_COMPOSE) run --rm php composer update -v
-	$(DOCKER_COMPOSE) build --pull
+dist-upgrade: ##@development update application package, pull, rebuild
+	$(DOCKER_COMPOSE) build --pull --build-arg BUILD_NO_INSTALL=1
+	$(MAKE) upgrade
+	$(MAKE) build
 
 dev-assets:	 ##@development open application development bash
 	$(DOCKER_COMPOSE) run --rm -e APP_ASSET_USE_BUNDLED=0 php yii asset/compress src/config/assets.php web/bundles/config.php

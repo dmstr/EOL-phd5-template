@@ -23,10 +23,14 @@ bash-xdebug: ##@development open application development bash with xdebug enable
 
 run-tests: ##@test run tests
 	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test php sh -c 'codecept clean'
-	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test php sh -c 'codecept run --steps -g ${CODECEPTION_GROUP} --html=_report.html --xml=junit.xml'
+	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test php sh -c 'codecept run --steps -g ${CODECEPTION_GROUP} --html --xml'
 
 run-coverage: ##@test run tests
 	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test -e PHP_ENABLE_XDEBUG=1 php sh -c 'codecept run -x optional --coverage-html --html=_report-coverage.html'
+
+run-tests-app: ##@test run tests
+	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test php sh -c 'codecept clean'
+	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test php sh -c 'codecept run --steps -g ${CODECEPTION_GROUP} --html --xml'
 
 
 open-vnc: ##@test open application database service in browser
