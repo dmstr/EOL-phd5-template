@@ -7,7 +7,6 @@ class ControllerTest extends \Codeception\Test\Unit
      */
     public function testApp()
     {
-
         $this->assertNotNull(Yii::$app);
     }
 
