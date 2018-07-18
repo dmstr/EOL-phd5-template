@@ -16,24 +16,30 @@ services:
       - redis
       - mailcatcher
       - firefox
-    environment:
-      - DB_ENV_MYSQL_ROOT_PASSWORD=secret
-      - PHP_ENABLE_XDEBUG
-      - YII_ENV=test
-      - APP_INTERACTIVE=0
-      - APP_CONFIG_FILE=/app/project/tests/codeception/_config/test.php
-      - APP_MIGRATION_LOOKUP=/app/project/tests/codeception/_migrations/data
-      - APP_ADMIN_PASSWORD=admin1
-      - APP_ADMIN_EMAIL=admin@test.local
-      - APP_ASSET_USE_BUNDLED=1
-      - APP_ASSET_FORCE_PUBLISH=0
+    env_file:
+      - ./project/tests/env-defaults
     volumes:
       - ./project/tests:/app/project/tests
-      - ./vendor-dev:/app/vendor
     networks:
       default:
         aliases:
           - web
+
+  tester:
+    build: .
+    working_dir: /app/project/tests
+    ports:
+      - 80
+    depends_on:
+      - db
+      - redis
+      - mailcatcher
+      - firefox
+    env_file:
+      - ./project/tests/env-defaults
+    volumes:
+      - ./project/tests:/app/project/tests
+      - ./vendor-dev:/app/vendor
 
   db:
     image: percona:5.6

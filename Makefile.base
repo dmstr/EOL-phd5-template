@@ -1,14 +1,20 @@
-.PHONY: default help build up clean open open-db setup
+.PHONY: default build up clean open open-db setup help
 
+# Define the docker-compose binary via ENV variable
 DOCKER_COMPOSE  ?= docker-compose
+# Default for Linux & Docker for Mac, set ENV variable when running i.e. docker-machine under macOS
 DOCKER_HOST     ?= localhost
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Darwin)
 	OPEN_CMD        ?= open
-	DOCKER_HOST_IP  ?= $(shell echo $(DOCKER_HOST) | sed 's/tcp:\/\///' | sed 's/:[0-9.]*//')
 else
 	OPEN_CMD        ?= xdg-open
+endif
+
+ifdef DOCKER_HOST
+	DOCKER_HOST_IP  ?= $(shell echo $(DOCKER_HOST) | sed 's/tcp:\/\///' | sed 's/:[0-9.]*//')
+else
 	DOCKER_HOST_IP  ?= 127.0.0.1
 endif
 
@@ -17,23 +23,46 @@ endif
 
 default: help
 
-build:   ##@development build images in test-stack
+build: ##@base build images
+	#
+	# Building images from docker-compose definitions
+	#
 	$(DOCKER_COMPOSE) build --pull
 
-up:      ##@development start stack
+up: ##@base start stack
+	#
+	# Starting application stack
+	#
 	$(DOCKER_COMPOSE) up -d
 
-clean:   ##@development remove all containers in stack
+clean: ##@base remove all containers
+	#
+	# Cleaning Docker environment
+	#
+	$(DOCKER_COMPOSE) kill
+	$(DOCKER_COMPOSE) rm -fv
 	$(DOCKER_COMPOSE) down --remove-orphans
 
-open:	 ##@development open application web service in browser
-	$(OPEN_CMD) http://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port php 80 | sed 's/[0-9.]*://')
+open: ##@base open application web service
+	#
+	# Opening application on mapped web-service port
+	#
+	$(OPEN_CMD) http://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port php 80 | sed 's/[0-9.]*://') &>/dev/null
 
-open-db:	 ##@development open application database service in browser
-	$(OPEN_CMD) mysql://root:secret@$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port db 3306 | sed 's/[0-9.]*://')
+open-db: ##@base open application database service
+	$(OPEN_CMD) mysql://root:secret@$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port db 3306 | sed 's/[0-9.]*://') &>/dev/null
 
-setup:	 ##@development run application setup
+setup: ##@base run application setup
+	#
+	# Running application setup command (database, user)
+	#
 	$(DOCKER_COMPOSE) run --rm php yii app/setup
+
+logs: ##@base show logs
+	#
+	# Running application setup command (database, user)
+	#
+	$(DOCKER_COMPOSE) logs -f --tail 100 | cat -v
 
 # Help based on https://gist.github.com/prwhite/8168133 thanks to @nowox and @prwhite
 # And add help text after each target name starting with '\#\#'
@@ -51,7 +80,7 @@ HELP_FUN = \
 		} \
 		print "\n"; }
 
-help:				##@system show this help
+help: ##@system show this help
 	#
 	# General targets
 	#
