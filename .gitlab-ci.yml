@@ -8,7 +8,7 @@ stages:
 before_script:
   - echo $CI_SERVER_NAME
   # create sanitized project name
-  - export COMPOSE_PROJECT_NAME=$(echo "buildpipeline${CI_PIPELINE_ID}${CI_BUILD_NAME}"  | tr -dc '[:alnum:]\n\r' | tr '[:upper:]' '[:lower:]')
+  - export COMPOSE_PROJECT_NAME=$(echo "buildpipeline${CI_PIPELINE_ID}${CI_PROJECT_NAME}${CI_BUILD_NAME}"  | tr -dc '[:alnum:]\n\r' | tr '[:upper:]' '[:lower:]')
   - export APP_VERSION=$(git describe --always --dirty --tags)
   # define image names for local builds and repository
   - export BUILD_PHP_IMAGE=${COMPOSE_PROJECT_NAME}_php
@@ -22,7 +22,7 @@ before_script:
 
 after_script:
   # set docker-compose isolation
-  - export COMPOSE_PROJECT_NAME=buildpipeline${CI_PIPELINE_ID}${CI_BUILD_NAME}
+  - export COMPOSE_PROJECT_NAME=$(echo "buildpipeline${CI_PIPELINE_ID}${CI_PROJECT_NAME}${CI_BUILD_NAME}"  | tr -dc '[:alnum:]\n\r' | tr '[:upper:]' '[:lower:]')
   - cd project/tests
   - cp .env-dist .env
   - docker-compose down -v
