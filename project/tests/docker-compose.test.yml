@@ -18,6 +18,9 @@ services:
       - firefox
     env_file:
       - ./project/tests/env-defaults
+    environment:
+      # migration lookup is used from environment to switch between project and app tests (eg. gitlab-ci.yml)
+      - APP_MIGRATION_LOOKUP
     volumes:
       - ./project/tests:/app/project/tests
       - ./_host-volumes/app-tests-log:/app/tests/_log
@@ -39,6 +42,9 @@ services:
       - firefox
     env_file:
       - ./project/tests/env-defaults
+    environment:
+      # migration lookup is used from environment to switch between project and app tests (eg. gitlab-ci.yml)
+      - APP_MIGRATION_LOOKUP
     volumes:
       - ./project/tests:/app/project/tests
       - ./vendor-dev:/app/vendor

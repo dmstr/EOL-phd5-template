@@ -29,6 +29,8 @@ after_script:
 
 test:project:
   stage: test
+  variables:
+    APP_MIGRATION_LOOKUP: /app/project/tests/codeception/_migrations/data
   script:
     - make all run-tests
   artifacts:
@@ -38,6 +40,8 @@ test:project:
 
 test:app:
   stage: test
+  variables:
+    APP_MIGRATION_LOOKUP: /app/tests/codeception/_migrations/data
   script:
     - make all run-tests-app
   artifacts:
