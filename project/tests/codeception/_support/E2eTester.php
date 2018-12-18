@@ -20,15 +20,17 @@ class E2eTester extends \Codeception\Actor
 {
     use _generated\E2eTesterActions;
 
-   /**
-    * Define custom actions here
-    */
+    /**
+     * Login with username and password
+     * @param $username
+     * @param $password
+     */
     public function login($username, $password){
         $this->amOnPage('/user/security/login');
-        $this->fillField('input[name="login-form[login]"]', $username);
-        $this->fillField('input[name="login-form[password]"]', $password);
-        $this->click('#login-form button');
-        $this->waitForElementNotVisible('#login-form', 10);
+        $this->fillField('input[name="LoginForm[login]"]', $username);
+        $this->fillField('input[name="LoginForm[password]"]', $password);
+        $this->click('#LoginForm button');
+        $this->waitForElementNotVisible('#LoginForm', 10);
     }
 
     public function dontSeeHorizontalScrollbars(){
