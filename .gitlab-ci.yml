@@ -35,7 +35,7 @@ test:project:
     - make all run-tests
   artifacts:
     paths:
-      - project/tests/codeception/_log
+      - _host-volumes/project-tests-log
     when: always
 
 test:app:
@@ -46,7 +46,7 @@ test:app:
     - make all run-tests-app
   artifacts:
     paths:
-      - app/tests/codeception/_log
+      - _host-volumes/app-tests-log
     when: always
 
 lint:
