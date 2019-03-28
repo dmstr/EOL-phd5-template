@@ -1,4 +1,10 @@
 <?php
 
 // return configuration overrides for modules
-return [];
+// this configuration files configures a yii\base\Application
+return [
+    'aliases' => [
+        '@project' => '@root/project/src',
+    ],
+
+];
