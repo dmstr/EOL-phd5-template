@@ -18,9 +18,13 @@ Activate your **development environment** by creating a config file `.env` for *
 This setting will load and merge `docker-compose.dev.yml` with the default configuration.
 
     cp .env-dist .env
-    
-> :bulb: It is also recommended to create an environment config for the **application** under `src/modules/local.env`, this file can be used later to change
-environment settings during development.    
+
+To change environment variables for the PHP application at runtime, you can use a local file
+
+    cp project/config/local.env project/config/local.env-dist
+
+> :bulb: This feature is enabled via `ENV_LOCAL_FILE=...`, it is not recommended for
+production usage.
 
 Build your images
 
