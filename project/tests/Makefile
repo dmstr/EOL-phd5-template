@@ -32,6 +32,7 @@ run-coverage: ##@test run tests
 	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test -e PHP_ENABLE_XDEBUG=1 $(TESTER_SERVICE) sh -c 'codecept run -x optional --coverage-html --html=_report-coverage.html'
 
 run-tests-app: ##@test run tests
+	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) mkdir -p _log/codeception
 	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) sh -c 'codecept clean'
 	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) sh -c 'codecept run --steps -g ${CODECEPTION_GROUP} --html --xml'
 
