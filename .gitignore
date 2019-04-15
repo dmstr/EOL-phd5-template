@@ -20,3 +20,5 @@ docker-compose.override.yml
 project/tests/_log
 project/tests/codeception/_support/_generated
 
+_host-volumes
+
