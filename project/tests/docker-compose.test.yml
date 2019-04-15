@@ -23,8 +23,6 @@ services:
       - APP_MIGRATION_LOOKUP
     volumes:
       - ./project/tests:/app/project/tests
-      - ./_host-volumes/app-tests-log:/app/tests/_log
-      - ./_host-volumes/project-tests-log:/app/project/tests/_log
     networks:
       default:
         aliases:
@@ -48,6 +46,8 @@ services:
     volumes:
       - ./project/tests:/app/project/tests
       - ./vendor-dev:/app/vendor
+      - ./_host-volumes/app-tests-log:/app/tests/_log
+      - ./_host-volumes/project-tests-log:/app/project/tests/_log
 
   db:
     image: percona:5.6
