@@ -1,0 +1,15 @@
+version: '2.2'
+
+services:
+  tester:
+    depends_on:
+      - firefox
+  firefox:
+    image: selenium/standalone-firefox-debug:2.53.0
+    # workaround for Docker Beta, see https://github.com/SeleniumHQ/docker-selenium/issues/227#issuecomment-224865735
+    dns: 8.8.4.4
+    environment:
+      - no_proxy=localhost
+    ports:
+      - '4444'
+      - '5900'

@@ -1,0 +1,16 @@
+version: '2.2'
+
+services:
+  tester:
+    depends_on:
+      - chrome
+  chrome:
+    image: selenium/standalone-chrome-debug:3
+    # workaround for Docker Beta, see https://github.com/SeleniumHQ/docker-selenium/issues/227#issuecomment-224865735
+    dns: 8.8.4.4
+    environment:
+      - no_proxy=localhost
+      - VNC_NO_PASSWORD=1
+    ports:
+      - '4444'
+      - '5900'
