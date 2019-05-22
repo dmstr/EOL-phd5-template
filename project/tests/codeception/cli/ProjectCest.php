@@ -1,17 +1,14 @@
 <?php
 
-
+/**
+ * Class LoginLogoutCest
+ * @group mandatory
+ */
 class ProjectCest
 {
-    public function _before(CliTester $I)
-    {
-    }
-
-    public function _after(CliTester $I)
-    {
-    }
-
-    // tests
+    /**
+     * @param CliTester $I
+     */
     public function testYii(CliTester $I)
     {
         $I->runShellCommand('yii');
