@@ -14,7 +14,7 @@ $_SERVER['REQUEST_TIME'] = time();
 defined('APP_TYPE') or define('APP_TYPE', 'web');
 
 return yii\helpers\ArrayHelper::merge(
-    require(__DIR__ . '/../../../../src/config/main.php'),
+    require dirname(__DIR__,4) . '/src/config/main.php',
     [
         'language' => 'en',
         'components' => [
