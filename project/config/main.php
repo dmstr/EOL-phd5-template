@@ -5,6 +5,5 @@
 return [
     'aliases' => [
         '@project' => '@root/project/src',
-    ],
-
+    ]
 ];
