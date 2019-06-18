@@ -8,14 +8,12 @@ services:
 
   php:
     build: .
-    working_dir: /app/project/tests
     ports:
       - 80
     depends_on:
       - db
       - redis
       - mailcatcher
-      - firefox
     env_file:
       - ./project/tests/env-defaults
     environment:
@@ -37,7 +35,6 @@ services:
       - db
       - redis
       - mailcatcher
-      - firefox
     env_file:
       - ./project/tests/env-defaults
     environment:
@@ -45,6 +42,7 @@ services:
       - APP_MIGRATION_LOOKUP
     volumes:
       - ./project/tests:/app/project/tests
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./vendor-dev:/app/vendor
       - ./_host-volumes/app-tests-log:/app/tests/_log
       - ./_host-volumes/project-tests-log:/app/project/tests/_log
@@ -55,16 +53,6 @@ services:
       - MYSQL_ROOT_PASSWORD=secret
     ports:
       - '3306'
-
-  firefox:
-    image: selenium/standalone-firefox-debug:2.53.0
-    # workaround for Docker Beta, see https://github.com/SeleniumHQ/docker-selenium/issues/227#issuecomment-224865735
-    dns: 8.8.4.4
-    environment:
-      - no_proxy=localhost
-    ports:
-      - '4444'
-      - '5900'
 
   mailcatcher:
     image: tophfr/mailcatcher
