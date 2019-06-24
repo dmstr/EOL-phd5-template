@@ -64,7 +64,7 @@ release:latest:
     - docker tag ${BUILD_PHP_IMAGE} ${STACK_PHP_IMAGE_LATEST}
     - docker push ${STACK_PHP_IMAGE_LATEST} || exit 1
   only:
-    - latest
+    - master
 
 release:tags:
   stage: release
