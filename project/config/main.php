@@ -4,6 +4,6 @@
 // this configuration files configures a yii\base\Application
 return [
     'aliases' => [
-        '@project' => '@root/project/src',
+        '@project' => '@root/project/src'
     ]
 ];
