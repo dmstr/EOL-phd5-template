@@ -1,9 +1,18 @@
 <?php
 
-// return configuration overrides for modules
-// this configuration files configures a yii\base\Application
-return [
+use yii\helpers\ArrayHelper;
+
+// general configuration across all application types
+$common = [
     'aliases' => [
         '@project' => '@root/project/src'
     ]
 ];
+
+// web specific application config
+$web = [];
+
+// console specific application config
+$console = [];
+
+return ArrayHelper::merge($common, ${APP_TYPE});
