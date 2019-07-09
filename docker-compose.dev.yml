@@ -8,7 +8,7 @@ services:
   php:
     build: .
     ports:
-      - '21080:80'
+      - '80'
     depends_on:
       - db
       - redis
@@ -36,7 +36,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=secret
     ports:
-      - '21090:3306'
+      - '3306'
 
   mailcatcher:
     image: nisenabe/mailcatcher
