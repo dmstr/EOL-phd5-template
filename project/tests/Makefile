@@ -6,11 +6,13 @@ BROWSER_SERVICE   ?= chrome
 include ../../Makefile.base
 
 all: ##@test [TEST] shorthand for
-	$(MAKE) init-tests version build
+	$(MAKE) init-tests version build install
 	$(MAKE) clean up setup
 
 init-tests: ##@development initialize test-environment
 	cp -n .env-dist .env &2>/dev/null
+
+install:
 	$(DOCKER_COMPOSE) run -w /app --rm $(TESTER_SERVICE) composer install
 
 version:

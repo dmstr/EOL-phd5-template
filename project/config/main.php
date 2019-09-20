@@ -6,6 +6,11 @@ use yii\helpers\ArrayHelper;
 $common = [
     'aliases' => [
         '@project' => '@root/project/src'
+    ],
+    'modules' => [
+        'user' => [
+            'generatePasswords' => true
+        ]
     ]
 ];
 

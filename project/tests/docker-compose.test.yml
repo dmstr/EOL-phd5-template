@@ -20,7 +20,7 @@ services:
       # migration lookup is used from environment to switch between project and app tests (eg. gitlab-ci.yml)
       - APP_MIGRATION_LOOKUP
     volumes:
-      - ./project/tests:/app/project/tests
+      - ./project:/app/project
     networks:
       default:
         aliases:
@@ -57,4 +57,4 @@ services:
   mailcatcher:
     image: tophfr/mailcatcher
     ports:
-      - '1080'
+      - '80'

@@ -41,4 +41,4 @@ services:
   mailcatcher:
     image: nisenabe/mailcatcher
     ports:
-      - '1080'
+      - '80'
