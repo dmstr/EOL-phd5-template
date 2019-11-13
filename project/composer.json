@@ -7,7 +7,7 @@
     "extra": {
         "merge-plugin": {
             "require": [
-                "composer.phd5.json"
+                "../composer.phd5.json"
             ]
         }
     },

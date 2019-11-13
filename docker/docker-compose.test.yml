@@ -7,7 +7,9 @@ version: '2.2'
 services:
 
   php:
-    build: .
+    build:
+      context: ..
+      dockerfile: Dockerfile
     ports:
       - 80
     depends_on:
@@ -15,19 +17,19 @@ services:
       - redis
       - mailcatcher
     env_file:
-      - ./project/tests/env-defaults
+      - ../project/tests/env-defaults
     environment:
       # migration lookup is used from environment to switch between project and app tests (eg. gitlab-ci.yml)
       - APP_MIGRATION_LOOKUP
     volumes:
-      - ./project:/app/project
+      - ../project:/app/project
     networks:
       default:
         aliases:
           - web
 
-  tester:
-    build: .
+  test-php:
+    build: ..
     working_dir: /app/project/tests
     ports:
       - 80
@@ -36,16 +38,16 @@ services:
       - redis
       - mailcatcher
     env_file:
-      - ./project/tests/env-defaults
+      - ../project/tests/env-defaults
     environment:
       # migration lookup is used from environment to switch between project and app tests (eg. gitlab-ci.yml)
       - APP_MIGRATION_LOOKUP
     volumes:
-      - ./project/tests:/app/project/tests
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./vendor-dev:/app/vendor
-      - ./_host-volumes/app-tests-log:/app/tests/_log
-      - ./_host-volumes/project-tests-log:/app/project/tests/_log
+      - ../project/tests:/app/project/tests
+      - ../vendor-dev:/app/vendor
+      - ../_host-volumes/app-tests-log:/app/tests/_log
+      - ../_host-volumes/project-tests-log:/app/project/tests/_log
 
   db:
     image: percona:5.6
