@@ -6,6 +6,9 @@ BROWSER_SERVICE ?= chrome
 COMPOSE_FILE_QA ?= ../docker-compose.yml:./docker-compose.test.yml:./docker-compose.qa.yml
 ROOT_PATH       ?= project
 
+CODECEPTION_GROUP ?= mandatory
+CODECEPTION_ENV   ?= chrome
+
 # Define the docker-compose binary via ENV variable
 DOCKER_COMPOSE  ?= docker-compose
 # Default for Linux & Docker for Mac, set ENV variable when running i.e. docker-machine under macOS
@@ -166,6 +169,12 @@ test-report: ##@test open HTML reports
 
 test-report-coverage: ##@test open HTML reports
 	$(OPEN_CMD) _log/coverage/index.html &>/dev/null
+
+app-test: ##@test run tests
+	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) mkdir -p _log/codeception
+	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) sh -c 'codecept clean'
+	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) sh -c 'codecept run  --env ${CODECEPTION_ENV} --steps -g ${CODECEPTION_GROUP} --html --xml'
+
 
 
 fix-source:	 ##@development fix source-code linting errors
