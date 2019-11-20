@@ -3,7 +3,7 @@
 #
 # Paths in this file are relative to the project root
 
-version: '2.2'
+version: '3.2'
 services:
 
   php:
