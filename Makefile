@@ -69,8 +69,8 @@ logs: ##@base show logs
 
 
 version: ##@base write current version string from git
-	$(shell echo $(shell git describe --long --tags --dirty --always) > ./src/version)
-	@echo $(shell cat ./src/version)
+	$(shell echo $(shell git describe --long --tags --dirty --always) > ./project/version)
+	@echo $(shell cat ./project/version)
 
 
 upgrade: ##@base update application package, pull, rebuild
@@ -173,14 +173,14 @@ fix-source:	 ##@development fix source-code linting errors
 	#
 	# Fixing source-code lint errors with cs-fixer
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v ../src
+	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v ./
 
 lint-source:	 ##@development run source-code linting
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Liniting source-code with cs-fixer
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v --dry-run ../src
+	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v --dry-run ./
 
 lint-metrics:	 ##@development run source-code metrics
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -202,13 +202,13 @@ lint-composer: ##@development run composer linting
 	#
 	# Listing installed packages
 	#
-	$(DOCKER_COMPOSE) run --rm $(PHP_SERVICE) composer --no-ansi show -f json | tee tests/_log/composer-packages-$(shell cat ./src/version).json || ERROR=1; \
+	$(DOCKER_COMPOSE) run --rm $(PHP_SERVICE) composer --no-ansi show -f json | tee tests/_log/composer-packages-$(shell cat ./project/version).json || ERROR=1; \
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Listing outdated packages
 	#
-	$(DOCKER_COMPOSE) run -T --rm $(PHP_SERVICE) composer --no-ansi show -o -f json | grep -zo "\{.*\}" | tee tests/_log/composer-outdated-packages-$(shell cat ./src/version).json || ERROR=1; \
+	$(DOCKER_COMPOSE) run -T --rm $(PHP_SERVICE) composer --no-ansi show -o -f json | grep -zo "\{.*\}" | tee tests/_log/composer-outdated-packages-$(shell cat ./project/version).json || ERROR=1; \
 	exit ${ERROR}
 
 lint-html:
