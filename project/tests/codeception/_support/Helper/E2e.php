@@ -6,5 +6,4 @@ namespace Helper;
 
 class E2e extends \Codeception\Module
 {
-
 }

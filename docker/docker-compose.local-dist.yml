@@ -2,7 +2,7 @@
 #
 # Variables are populated with values from `.env`
 #
-version: '2.2'
+version: '3.2'
 services:
 
   php:

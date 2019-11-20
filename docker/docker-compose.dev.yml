@@ -2,7 +2,7 @@
 #
 # Variables are populated with values from `.env`
 #
-version: '2.2'
+version: '3.2'
 services:
 
   php:
@@ -15,7 +15,6 @@ services:
       - db
       - redis
       - mailcatcher
-    working_dir: /app/project
     environment:
       # Development ONLY settings
       - DB_ENV_MYSQL_ROOT_PASSWORD=secret

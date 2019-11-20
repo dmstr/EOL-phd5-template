@@ -6,6 +6,9 @@ BROWSER_SERVICE ?= chrome
 COMPOSE_FILE_QA ?= ../docker-compose.yml:./docker-compose.test.yml:./docker-compose.qa.yml
 ROOT_PATH       ?= project
 
+CODECEPTION_GROUP ?= mandatory
+CODECEPTION_ENV   ?= chrome
+
 # Define the docker-compose binary via ENV variable
 DOCKER_COMPOSE  ?= docker-compose
 # Default for Linux & Docker for Mac, set ENV variable when running i.e. docker-machine under macOS
@@ -69,8 +72,8 @@ logs: ##@base show logs
 
 
 version: ##@base write current version string from git
-	$(shell echo $(shell git describe --long --tags --dirty --always) > ./src/version)
-	@echo $(shell cat ./src/version)
+	$(shell echo $(shell git describe --long --tags --dirty --always) > ./project/version)
+	@echo $(shell cat ./project/version)
 
 
 upgrade: ##@base update application package, pull, rebuild
@@ -88,12 +91,17 @@ dist-upgrade: ##@base update application package, pull, rebuild
 install: ##@base install PHP packages
 	$(DOCKER_COMPOSE) run --rm php composer install
 
-bash:	 ##@development run application bash in one-off container
+bash:	 ##@development execute application bash in one-off container
 	#
 	# Starting application bash
 	#
 	$(DOCKER_COMPOSE) exec php bash
 
+cli:	 ##@development run application cli in one-off container
+	#
+	# Starting application CLI container
+	#
+	$(DOCKER_COMPOSE) run --rm php bash
 
 assets:	 ##@development open application development bash
 	#
@@ -128,7 +136,6 @@ test: version build install up
 test: ##@test run tests
 	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(TESTER_SERVICE) codecept clean
 	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(TESTER_SERVICE) codecept run --env $(BROWSER_SERVICE) -x optional --steps --html --xml= --tap --json
-	$(DOCKER_COMPOSE) logs $(PHP_SERVICE) > tests/_log/docker.log
 
 test-coverage: ##@test run tests with code coverage
 	PHP_ENABLE_XDEBUG=1 $(DOCKER_COMPOSE) up -d
@@ -162,20 +169,26 @@ test-report: ##@test open HTML reports
 test-report-coverage: ##@test open HTML reports
 	$(OPEN_CMD) _log/coverage/index.html &>/dev/null
 
+app-test: ##@test run tests
+	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) mkdir -p _log/codeception
+	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) sh -c 'codecept clean'
+	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) sh -c 'codecept run  --env ${CODECEPTION_ENV} --steps -g ${CODECEPTION_GROUP} --html --xml'
+
+
 
 fix-source:	 ##@development fix source-code linting errors
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Fixing source-code lint errors with cs-fixer
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v ../src
+	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v ./
 
 lint-source:	 ##@development run source-code linting
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Liniting source-code with cs-fixer
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v --dry-run ../src
+	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v --dry-run ./
 
 lint-metrics:	 ##@development run source-code metrics
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -197,13 +210,13 @@ lint-composer: ##@development run composer linting
 	#
 	# Listing installed packages
 	#
-	$(DOCKER_COMPOSE) run --rm $(PHP_SERVICE) composer --no-ansi show -f json | tee tests/_log/composer-packages-$(shell cat ./src/version).json || ERROR=1; \
+	$(DOCKER_COMPOSE) run --rm $(PHP_SERVICE) composer --no-ansi show -f json | tee tests/_log/composer-packages-$(shell cat ./project/version).json || ERROR=1; \
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Listing outdated packages
 	#
-	$(DOCKER_COMPOSE) run -T --rm $(PHP_SERVICE) composer --no-ansi show -o -f json | grep -zo "\{.*\}" | tee tests/_log/composer-outdated-packages-$(shell cat ./src/version).json || ERROR=1; \
+	$(DOCKER_COMPOSE) run -T --rm $(PHP_SERVICE) composer --no-ansi show -o -f json | grep -zo "\{.*\}" | tee tests/_log/composer-outdated-packages-$(shell cat ./project/version).json || ERROR=1; \
 	exit ${ERROR}
 
 lint-html:
