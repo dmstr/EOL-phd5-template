@@ -25,12 +25,11 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 before_script:
-  - cd project/tests
   - cp .env-dist .env
   - make all
 
 script:
-  - make run-tests
+  - make test
 
 after_script:
   - make clean

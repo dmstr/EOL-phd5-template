@@ -20,10 +20,11 @@ class FunctionalTester extends \Codeception\Actor
 {
     use _generated\FunctionalTesterActions;
 
-   /**
-    * Define custom actions here
-    */
-    public function login($username, $password){
+    /**
+     * Define custom actions here
+     */
+    public function login($username, $password)
+    {
         $this->amOnPage('/user/security/login');
         $this->fillField('input[name="LoginForm[login]"]', $username);
         $this->fillField('input[name="LoginForm[password]"]', $password);

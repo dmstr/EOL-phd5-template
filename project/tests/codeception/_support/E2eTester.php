@@ -25,7 +25,8 @@ class E2eTester extends \Codeception\Actor
      * @param $username
      * @param $password
      */
-    public function login($username, $password){
+    public function login($username, $password)
+    {
         $this->amOnPage('/user/security/login');
         $this->fillField('input[name="LoginForm[login]"]', $username);
         $this->fillField('input[name="LoginForm[password]"]', $password);
@@ -33,7 +34,8 @@ class E2eTester extends \Codeception\Actor
         $this->waitForElementNotVisible('#LoginForm', 10);
     }
 
-    public function dontSeeHorizontalScrollbars(){
+    public function dontSeeHorizontalScrollbars()
+    {
         $this->assertFalse(
             $this->executeJS("return document.getElementsByTagName(\"html\")[0].scrollWidth > document.getElementsByTagName(\"html\")[0].clientWidth"),
             'Horizontal scrollbar'

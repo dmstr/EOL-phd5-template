@@ -2,11 +2,13 @@
 #
 # Variables are populated with values from `.env`
 #
-version: '2.2'
+version: '3.2'
 services:
 
   php:
-    build: .
+    build:
+      context: ..
+      dockerfile: Dockerfile
     ports:
       - '80'
     depends_on:
@@ -22,13 +24,11 @@ services:
 
     volumes:
       # Application source-code
-      - ./project/:/app/project:cached
+      - ../project/:/app/project:cached
       # Vendor source-code
-      - ./vendor-dev:/app/vendor:delegated
+      - ../vendor-dev:/app/vendor:delegated
       # For composer usage in container; NOTE! There may be performance issues, see also https://github.com/docker/for-mac/issues/77
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./composer.json:/app/composer.json:cached
-      - ./composer.lock:/app/composer.lock:cached
 
   db:
     #command: --character-set-server=utf8 --collation-server=utf8_general_ci

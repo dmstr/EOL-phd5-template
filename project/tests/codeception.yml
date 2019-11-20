@@ -26,7 +26,7 @@ coverage:
     remote: false
     whitelist:
         include:
-            - ../src/*.php
+            - ../*.php
         exclude:
-            - ../src/commands/*
-            - ../src/migrations/*
+            - ./../tests
+            - ./../config
