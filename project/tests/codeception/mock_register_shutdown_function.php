@@ -1,4 +1,5 @@
 <?php
+
 namespace yii\log;
 
 function register_shutdown_function()
