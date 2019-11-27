@@ -15,6 +15,7 @@ web/assets
 web/bundles
 
 docker-compose.override.yml
+docker-compose.local.yml
 
 # codeception output & generated files
 project/tests/_log
