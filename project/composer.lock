@@ -2621,16 +2621,16 @@
         },
         {
             "name": "dmstr/yii2-pages-module",
-            "version": "2.0.0-rc4",
+            "version": "2.0.0-rc5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dmstr/yii2-pages-module.git",
-                "reference": "0ca156afaf1ac8466e22fa240ca7140fb60f37cf"
+                "reference": "1687c1b58d1b01dd23cf82fc8edb283e4646a475"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dmstr/yii2-pages-module/zipball/0ca156afaf1ac8466e22fa240ca7140fb60f37cf",
-                "reference": "0ca156afaf1ac8466e22fa240ca7140fb60f37cf",
+                "url": "https://api.github.com/repos/dmstr/yii2-pages-module/zipball/1687c1b58d1b01dd23cf82fc8edb283e4646a475",
+                "reference": "1687c1b58d1b01dd23cf82fc8edb283e4646a475",
                 "shasum": ""
             },
             "require": {
@@ -2682,7 +2682,7 @@
                 "navigation",
                 "yii2"
             ],
-            "time": "2020-01-08T08:44:40+00:00"
+            "time": "2020-01-08T10:02:30+00:00"
         },
         {
             "name": "dmstr/yii2-prototype-module",
