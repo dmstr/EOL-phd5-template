@@ -101,13 +101,13 @@ cli:	 ##@development run application cli in one-off container
 	#
 	# Starting application CLI container
 	#
-	$(DOCKER_COMPOSE) run --rm php bash
+	$(DOCKER_COMPOSE) run --rm --workdir=/app/src -e PHP_USER_ID=0 $(PHP_SERVICE) bash
 
 assets:	 ##@development open application development bash
 	#
 	# Building asset bundles
 	#
-	$(DOCKER_COMPOSE) run --rm -e APP_ASSET_USE_BUNDLED=0 php yii asset/compress config/assets.php web/bundles/config.php
+	$(DOCKER_COMPOSE) run --rm -e APP_ASSET_USE_BUNDLED=0 $(PHP_SERVICE) yii asset/compress config/assets.php web/bundles/config.php
 
 
 init:    ##@development install composer package (enable host-volume in docker-compose config)
@@ -123,7 +123,7 @@ setup: ##@development run application setup
 	#
 	# Running application setup command (database, user)
 	#
-	$(DOCKER_COMPOSE) run --rm php yii app/setup
+	$(DOCKER_COMPOSE) run --rm $(PHP_SERVICE) yii app/setup
 
 browser: ##@development open application web service in browser
 	#
@@ -152,13 +152,13 @@ test-bash:	 ##@test run application bash in one-off container
 	#
 	# Starting application bash
 	#
-	$(DOCKER_COMPOSE) run --rm test-php bash
+	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE)  bash
 
 test-browser: ##@test open application web service in browser
 	#
 	# Opening application on mapped web-service port
 	#
-	$(OPEN_CMD) http://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port test-php 80 | sed 's/[0-9.]*://') &>/dev/null
+	$(OPEN_CMD) http://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port $(TESTER_SERVICE)  80 | sed 's/[0-9.]*://') &>/dev/null
 
 test-selenium: ##@test open application database service in browser
 	$(OPEN_CMD) vnc://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port $(BROWSER_SERVICE) 5900 | sed 's/[0-9.]*://') &>/dev/null
@@ -181,14 +181,14 @@ fix-source:	 ##@development fix source-code linting errors
 	#
 	# Fixing source-code lint errors with cs-fixer
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v ./
+	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v ../src
 
 lint-source:	 ##@development run source-code linting
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Liniting source-code with cs-fixer
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v --dry-run ./
+	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v --dry-run ../src
 
 lint-metrics:	 ##@development run source-code metrics
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -204,20 +204,20 @@ lint-composer: ##@development run composer linting
 	#
 	# Liniting composer configuration
 	#
-	$(DOCKER_COMPOSE) run --rm $(PHP_SERVICE) composer --no-ansi validate || ERROR=1; \
+	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) composer -d../src --no-ansi validate
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Listing installed packages
 	#
-	$(DOCKER_COMPOSE) run --rm $(PHP_SERVICE) composer --no-ansi show -f json | tee tests/_log/composer-packages-$(shell cat ./project/version).json || ERROR=1; \
+	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) sh -c 'composer -d../src --no-ansi show -f json | tee _log/composer/packages-$(shell cat ./src/version).json'
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Listing outdated packages
 	#
-	$(DOCKER_COMPOSE) run -T --rm $(PHP_SERVICE) composer --no-ansi show -o -f json | grep -zo "\{.*\}" | tee tests/_log/composer-outdated-packages-$(shell cat ./project/version).json || ERROR=1; \
-	exit ${ERROR}
+	$(DOCKER_COMPOSE) run -T --rm $(TESTER_SERVICE) sh -c 'composer  -d../src --no-ansi show -o -f json | grep -zo "\{.*\}" | tee _log/composer/outdated-packages-$(shell cat ./src/version).json'
+
 
 lint-html:
 	COMPOSE_FILE=$(COMPOSE_FILE_QA) $(DOCKER_COMPOSE) run --rm  validator http://web
