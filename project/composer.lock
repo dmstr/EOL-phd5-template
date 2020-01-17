@@ -352,16 +352,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.132.0",
+            "version": "3.133.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d1ea3332539a07d122e5cf397c0eb3a1fb75eede"
+                "reference": "27b4f0fbdf34a88df6788ffdefc3620511894676"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d1ea3332539a07d122e5cf397c0eb3a1fb75eede",
-                "reference": "d1ea3332539a07d122e5cf397c0eb3a1fb75eede",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/27b4f0fbdf34a88df6788ffdefc3620511894676",
+                "reference": "27b4f0fbdf34a88df6788ffdefc3620511894676",
                 "shasum": ""
             },
             "require": {
@@ -432,29 +432,29 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-01-07T19:13:51+00:00"
+            "time": "2020-01-16T21:19:17+00:00"
         },
         {
             "name": "bedezign/yii2-audit",
-            "version": "1.1.2",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bedezign/yii2-audit.git",
-                "reference": "f198052cc98d1daadfb7600d7b816a2208d73eca"
+                "reference": "2f5e9a935f0e3ab73aabec792de053af3663ab17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bedezign/yii2-audit/zipball/f198052cc98d1daadfb7600d7b816a2208d73eca",
-                "reference": "f198052cc98d1daadfb7600d7b816a2208d73eca",
+                "url": "https://api.github.com/repos/bedezign/yii2-audit/zipball/2f5e9a935f0e3ab73aabec792de053af3663ab17",
+                "reference": "2f5e9a935f0e3ab73aabec792de053af3663ab17",
                 "shasum": ""
             },
             "require": {
-                "2amigos/yii2-chartjs-widget": ">=2.0.1 <3.0.0",
+                "2amigos/yii2-chartjs-widget": "^2.0.1",
                 "ext-bcmath": "*",
-                "php": ">=7.2.0",
+                "php": ">=5.4.0",
                 "phpspec/php-diff": "1.*",
-                "yiisoft/yii2": ">=2.0.0 <2.1.0",
-                "yiisoft/yii2-debug": ">=2.1.0 <2.2.0"
+                "yiisoft/yii2": "^2.0.13",
+                "yiisoft/yii2-debug": "^2.0.7"
             },
             "suggest": {
                 "php-mime-mail-parser/php-mime-mail-parser": "Allows better displaying of logged emails."
@@ -479,14 +479,14 @@
                     "homepage": "http://bedezign.com/"
                 },
                 {
-                    "name": "Brett O'Donnell",
-                    "email": "cornernote@gmail.com",
-                    "homepage": "https://mrphp.com.au/"
-                },
-                {
                     "name": "Marc Hollander",
                     "email": "marchollander@gmail.com",
                     "homepage": "http://maruc.nl/"
+                },
+                {
+                    "name": "Brett O'Donnell",
+                    "email": "cornernote@gmail.com",
+                    "homepage": "https://mrphp.com.au/"
                 }
             ],
             "description": "Yii2 Audit records and displays web/cli requests, database changes, php/js errors and associated data.",
@@ -496,20 +496,20 @@
                 "trail",
                 "yii2"
             ],
-            "time": "2019-11-01T21:21:20+00:00"
+            "time": "2018-02-04T11:48:24+00:00"
         },
         {
             "name": "bower-asset/ace-builds",
-            "version": "v1.4.7",
+            "version": "v1.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ajaxorg/ace-builds.git",
-                "reference": "5ad04a46e8e0981a65dd982693e5d19a2209311c"
+                "reference": "a279fe5367ed15a2c2f3fca96fccd1fe0681a547"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ajaxorg/ace-builds/zipball/5ad04a46e8e0981a65dd982693e5d19a2209311c",
-                "reference": "5ad04a46e8e0981a65dd982693e5d19a2209311c",
+                "url": "https://api.github.com/repos/ajaxorg/ace-builds/zipball/a279fe5367ed15a2c2f3fca96fccd1fe0681a547",
+                "reference": "a279fe5367ed15a2c2f3fca96fccd1fe0681a547",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -522,7 +522,7 @@
                 "BSD"
             ],
             "description": "Ace (Ajax.org Cloud9 Editor)",
-            "time": "2019-10-17T17:24:39+00:00"
+            "time": "2020-01-14T18:49:14+00:00"
         },
         {
             "name": "bower-asset/angular",
@@ -1478,16 +1478,16 @@
         },
         {
             "name": "bower-asset/sifter",
-            "version": "v0.5.3",
+            "version": "v0.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brianreavis/sifter.js.git",
-                "reference": "2a9c84ec5ac63ceaa4516205e013113626d36a2d"
+                "reference": "2009705c24ba9bb0fbe71fa3c60b1dfa682538d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brianreavis/sifter.js/zipball/2a9c84ec5ac63ceaa4516205e013113626d36a2d",
-                "reference": "2a9c84ec5ac63ceaa4516205e013113626d36a2d",
+                "url": "https://api.github.com/repos/brianreavis/sifter.js/zipball/2009705c24ba9bb0fbe71fa3c60b1dfa682538d2",
+                "reference": "2009705c24ba9bb0fbe71fa3c60b1dfa682538d2",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -1519,7 +1519,7 @@
                 "sift",
                 "sort"
             ],
-            "time": "2017-12-01T03:21:28+00:00"
+            "time": "2020-01-08T20:50:21+00:00"
         },
         {
             "name": "bower-asset/smalot-bootstrap-datetimepicker",
@@ -2621,16 +2621,16 @@
         },
         {
             "name": "dmstr/yii2-pages-module",
-            "version": "2.0.0-rc5",
+            "version": "2.0.0-rc7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dmstr/yii2-pages-module.git",
-                "reference": "1687c1b58d1b01dd23cf82fc8edb283e4646a475"
+                "reference": "ff02e914532b93ea865b929a40abfcbc1bca8c8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dmstr/yii2-pages-module/zipball/1687c1b58d1b01dd23cf82fc8edb283e4646a475",
-                "reference": "1687c1b58d1b01dd23cf82fc8edb283e4646a475",
+                "url": "https://api.github.com/repos/dmstr/yii2-pages-module/zipball/ff02e914532b93ea865b929a40abfcbc1bca8c8d",
+                "reference": "ff02e914532b93ea865b929a40abfcbc1bca8c8d",
                 "shasum": ""
             },
             "require": {
@@ -2682,11 +2682,11 @@
                 "navigation",
                 "yii2"
             ],
-            "time": "2020-01-08T10:02:30+00:00"
+            "time": "2020-01-08T12:30:00+00:00"
         },
         {
             "name": "dmstr/yii2-prototype-module",
-            "version": "1.0.0-beta6",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dmstr/yii2-prototype-module.git",
@@ -4178,6 +4178,7 @@
                 "cron",
                 "schedule"
             ],
+            "abandoned": "dragonmantank/cron-expression",
             "time": "2019-12-28T04:23:06+00:00"
         },
         {
@@ -5492,16 +5493,16 @@
         },
         {
             "name": "sabre/dav",
-            "version": "4.0.2",
+            "version": "4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabre-io/dav.git",
-                "reference": "fd0234d46c045fc9b35ec06bd2e7b490240e6ade"
+                "reference": "b793fb4ce27cf0f981b540ad771281c430ffe818"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabre-io/dav/zipball/fd0234d46c045fc9b35ec06bd2e7b490240e6ade",
-                "reference": "fd0234d46c045fc9b35ec06bd2e7b490240e6ade",
+                "url": "https://api.github.com/repos/sabre-io/dav/zipball/b793fb4ce27cf0f981b540ad771281c430ffe818",
+                "reference": "b793fb4ce27cf0f981b540ad771281c430ffe818",
                 "shasum": ""
             },
             "require": {
@@ -5567,7 +5568,7 @@
                 "framework",
                 "iCalendar"
             ],
-            "time": "2019-10-19T07:17:49+00:00"
+            "time": "2020-01-10T07:52:45+00:00"
         },
         {
             "name": "sabre/event",
@@ -5737,16 +5738,16 @@
         },
         {
             "name": "sabre/vobject",
-            "version": "4.2.1",
+            "version": "4.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabre-io/vobject.git",
-                "reference": "6d7476fbd227ae285029c19ad518cd451336038c"
+                "reference": "449616b2d45b95c8973975de23f34a3d14f63b4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabre-io/vobject/zipball/6d7476fbd227ae285029c19ad518cd451336038c",
-                "reference": "6d7476fbd227ae285029c19ad518cd451336038c",
+                "url": "https://api.github.com/repos/sabre-io/vobject/zipball/449616b2d45b95c8973975de23f34a3d14f63b4b",
+                "reference": "449616b2d45b95c8973975de23f34a3d14f63b4b",
                 "shasum": ""
             },
             "require": {
@@ -5829,7 +5830,7 @@
                 "xCal",
                 "xCard"
             ],
-            "time": "2019-12-18T19:29:43+00:00"
+            "time": "2020-01-14T10:18:45+00:00"
         },
         {
             "name": "sabre/xml",
@@ -7835,24 +7836,23 @@
         },
         {
             "name": "composer/semver",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "46d9139568ccb8d9e7cdd4539cab7347568a5e2e"
+                "reference": "c6bea70230ef4dd483e6bbcab6005f682ed3a8de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/46d9139568ccb8d9e7cdd4539cab7347568a5e2e",
-                "reference": "46d9139568ccb8d9e7cdd4539cab7347568a5e2e",
+                "url": "https://api.github.com/repos/composer/semver/zipball/c6bea70230ef4dd483e6bbcab6005f682ed3a8de",
+                "reference": "c6bea70230ef4dd483e6bbcab6005f682ed3a8de",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.3.2 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.5 || ^5.0.5",
-                "phpunit/phpunit-mock-objects": "2.3.0 || ^3.0"
+                "phpunit/phpunit": "^4.5 || ^5.0.5"
             },
             "type": "library",
             "extra": {
@@ -7893,7 +7893,7 @@
                 "validation",
                 "versioning"
             ],
-            "time": "2019-03-19T17:25:45+00:00"
+            "time": "2020-01-13T12:06:48+00:00"
         },
         {
             "name": "composer/xdebug-handler",
@@ -10857,7 +10857,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "dmstr/yii2-db": 15,
         "dmstr/yii2-filemanager-widgets": 15,
         "dmstr/yii2-pages-module": 5,
         "dmstr/yii2-prototype-module": 10,
