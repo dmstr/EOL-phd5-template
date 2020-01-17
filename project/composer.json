@@ -1,5 +1,6 @@
 {
     "name": "dmstr/phd5-template",
+    "description": "phd5 app template",
     "minimum-stability": "stable",
     "require": {
         "wikimedia/composer-merge-plugin": "~1.4"

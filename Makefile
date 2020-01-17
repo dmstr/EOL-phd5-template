@@ -188,7 +188,7 @@ lint-source:	 ##@development run source-code linting
 	#
 	# Liniting source-code with cs-fixer
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v --dry-run ../src
+	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v --dry-run ../../src
 
 lint-metrics:	 ##@development run source-code metrics
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -204,19 +204,19 @@ lint-composer: ##@development run composer linting
 	#
 	# Liniting composer configuration
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) composer -d../src --no-ansi validate
+	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) composer -d../ --no-ansi --no-check-publish validate
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Listing installed packages
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) sh -c 'composer -d../src --no-ansi show -f json | tee _log/composer/packages-$(shell cat ./src/version).json'
+	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) sh -c 'composer -d../ --no-ansi show -f json | tee _log/composer/packages-$(shell cat /app/src/version).json'
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Listing outdated packages
 	#
-	$(DOCKER_COMPOSE) run -T --rm $(TESTER_SERVICE) sh -c 'composer  -d../src --no-ansi show -o -f json | grep -zo "\{.*\}" | tee _log/composer/outdated-packages-$(shell cat ./src/version).json'
+	$(DOCKER_COMPOSE) run -T --rm $(TESTER_SERVICE) sh -c 'composer  -d../ --no-ansi show -o -f json | grep -zo "\{.*\}" | tee _log/composer/outdated-packages-$(shell cat /app/src/version).json'
 
 
 lint-html:
