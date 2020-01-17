@@ -210,13 +210,13 @@ lint-composer: ##@development run composer linting
 	#
 	# Listing installed packages
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) sh -c 'composer -d../ --no-ansi show -f json | tee _log/composer/packages-$(shell cat /app/src/version).json'
+	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) sh -c 'composer -d../ --no-ansi show -f json | tee _log/packages-$(shell cat /app/src/version).json'
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Listing outdated packages
 	#
-	$(DOCKER_COMPOSE) run -T --rm $(TESTER_SERVICE) sh -c 'composer  -d../ --no-ansi show -o -f json | grep -zo "\{.*\}" | tee _log/composer/outdated-packages-$(shell cat /app/src/version).json'
+	$(DOCKER_COMPOSE) run -T --rm $(TESTER_SERVICE) sh -c 'composer  -d../ --no-ansi show -o -f json | grep -zo "\{.*\}" | tee _log/outdated-packages-$(shell cat /app/src/version).json'
 
 
 lint-html:
