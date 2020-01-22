@@ -16,17 +16,12 @@ services:
       - db
       - redis
       - mailcatcher
-    env_file:
-      - ../project/tests/env-defaults
     environment:
       # migration lookup is used from environment to switch between project and app tests (eg. gitlab-ci.yml)
       - APP_MIGRATION_LOOKUP
     volumes:
       - ../project:/app/project
-    networks:
-      default:
-        aliases:
-          - web
+
 
   test-php:
     build: ..
@@ -48,6 +43,10 @@ services:
       - ../vendor-dev:/app/vendor
       - ../_host-volumes/app-tests-log:/app/tests/_log
       - ../_host-volumes/project-tests-log:/app/project/tests/_log
+    networks:
+      default:
+        aliases:
+          - web
 
   db:
     image: percona:5.6
