@@ -30,7 +30,7 @@ test:project:
   variables:
     APP_MIGRATION_LOOKUP: /app/project/tests/codeception/_migrations/data
   script:
-    - make all test
+    - make test
   artifacts:
     paths:
       - _host-volumes/project-tests-log
@@ -41,7 +41,7 @@ test:app:
   variables:
     APP_MIGRATION_LOOKUP: /app/tests/codeception/_migrations/data
   script:
-    - make all app-test
+    - make app-test
   artifacts:
     paths:
       - _host-volumes/app-tests-log
