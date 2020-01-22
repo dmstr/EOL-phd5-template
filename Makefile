@@ -170,6 +170,7 @@ test-report: ##@test open HTML reports
 test-report-coverage: ##@test open HTML reports
 	$(OPEN_CMD) _log/coverage/index.html &>/dev/null
 
+app-test: version build install up
 app-test: ##@test run tests
 	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) mkdir -p _log/codeception
 	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) sh -c 'codecept clean'
