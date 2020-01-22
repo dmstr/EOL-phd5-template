@@ -37,6 +37,7 @@ services:
     environment:
       # migration lookup is used from environment to switch between project and app tests (eg. gitlab-ci.yml)
       - APP_MIGRATION_LOOKUP
+      - APP_CONFIG_FILE
       - APP_ADMIN_EMAIL=admin@test.local
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
