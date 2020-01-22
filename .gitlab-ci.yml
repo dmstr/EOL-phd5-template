@@ -39,8 +39,8 @@ test:project:
 test:app:
   stage: test
   variables:
-    APP_MIGRATION_LOOKUP: /app/tests/codeception/_migrations/data
-    APP_CONFIG_FILE: @root/tests/codeception/_config/test.php
+    APP_MIGRATION_LOOKUP: "/app/tests/codeception/_migrations/data"
+    APP_CONFIG_FILE: "/app/project/config/main.php,/app/tests/codeception/_config/test.php"
   script:
     - make app-test
   artifacts:
