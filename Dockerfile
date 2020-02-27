@@ -9,7 +9,7 @@ ENV APP_CONFIG_FILE=/app/project/config/main.php
 
 WORKDIR /app/project
 
-# Additional packages, see also `docker-compose.dev.yml` for host-volumes
+# Additional packages
 COPY ./project/composer.* /app/project/
 # Composer installation (skipped on first build in dist-upgrade)
 RUN if [ -z "$BUILD_NO_INSTALL" ]; then \

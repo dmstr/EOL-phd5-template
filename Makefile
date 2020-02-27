@@ -1,7 +1,8 @@
 .PHONY: all dev init bash exec upgrade update assets latest default build up clean open open-db setup help
 
 PHP_SERVICE     ?= php
-TESTER_SERVICE  ?= test-php
+APP_TESTER_SERVICE  ?= app-test-php
+PROJECT_TESTER_SERVICE  ?= project-test-php
 BROWSER_SERVICE ?= chrome
 COMPOSE_FILE_QA ?= ../docker-compose.yml:./docker-compose.test.yml:./docker-compose.qa.yml
 ROOT_PATH       ?= project
@@ -125,6 +126,8 @@ setup: ##@development run application setup
 	#
 	$(DOCKER_COMPOSE) run --rm $(PHP_SERVICE) yii app/setup
 
+open: browser
+
 browser: ##@development open application web service in browser
 	#
 	# Opening application on mapped web-service port
@@ -134,15 +137,15 @@ browser: ##@development open application web service in browser
 
 test: version build install up
 test: ##@test run tests
-	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(TESTER_SERVICE) yii app/setup
-	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(TESTER_SERVICE) codecept clean
-	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(TESTER_SERVICE) codecept run --env $(BROWSER_SERVICE) -x optional --steps --html --xml= --tap --json
+	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(PROJECT_TESTER_SERVICE) yii app/setup
+	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(PROJECT_TESTER_SERVICE) codecept clean
+	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(PROJECT_TESTER_SERVICE) codecept run --env $(BROWSER_SERVICE) -g ${CODECEPTION_GROUP} --steps --html --xml= --tap --json
 
 test-coverage: ##@test run tests with code coverage
 	PHP_ENABLE_XDEBUG=1 $(DOCKER_COMPOSE) up -d
-	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(TESTER_SERVICE) yii app/setup
-	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(TESTER_SERVICE) codecept clean
-	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test -e PHP_ENABLE_XDEBUG=1 $(TESTER_SERVICE) codecept run --env $(BROWSER_SERVICE) -x optional --coverage-html --coverage-xml --html --xml
+	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(PROJECT_TESTER_SERVICE) yii app/setup
+	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(PROJECT_TESTER_SERVICE) codecept clean
+	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test -e PHP_ENABLE_XDEBUG=1 $(PROJECT_TESTER_SERVICE) codecept run --env $(BROWSER_SERVICE) -g ${CODECEPTION_GROUP} --coverage-html --coverage-xml --html --xml
 
 test-init: ##@test initialize test-environment
 	cp -n .env-dist .env &2>/dev/null
@@ -153,13 +156,15 @@ test-bash:	 ##@test run application bash in one-off container
 	#
 	# Starting application bash
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE)  bash
+	$(DOCKER_COMPOSE) run --rm $(PROJECT_TESTER_SERVICE)  bash
+
+test-open: test-browser
 
 test-browser: ##@test open application web service in browser
 	#
 	# Opening application on mapped web-service port
 	#
-	$(OPEN_CMD) http://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port $(TESTER_SERVICE)  80 | sed 's/[0-9.]*://') &>/dev/null
+	$(OPEN_CMD) http://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port $(PROJECT_TESTER_SERVICE)  80 | sed 's/[0-9.]*://') &>/dev/null
 
 test-selenium: ##@test open application database service in browser
 	$(OPEN_CMD) vnc://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port $(BROWSER_SERVICE) 5900 | sed 's/[0-9.]*://') &>/dev/null
@@ -172,9 +177,9 @@ test-report-coverage: ##@test open HTML reports
 
 app-test: version build install up
 app-test: ##@test run tests
-	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) mkdir -p _log/codeception
-	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) sh -c 'codecept clean'
-	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(TESTER_SERVICE) sh -c 'codecept run  --env ${CODECEPTION_ENV} --steps -g ${CODECEPTION_GROUP} --html --xml'
+	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(APP_TESTER_SERVICE) mkdir -p _log/codeception
+	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(APP_TESTER_SERVICE) sh -c 'codecept clean'
+	$(DOCKER_COMPOSE) run --rm -w /app/tests -e YII_ENV=test $(APP_TESTER_SERVICE) sh -c 'codecept run  --env ${CODECEPTION_ENV} --steps -g ${CODECEPTION_GROUP} --html --xml'
 
 
 
@@ -183,14 +188,14 @@ fix-source:	 ##@development fix source-code linting errors
 	#
 	# Fixing source-code lint errors with cs-fixer
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v ../src
+	$(DOCKER_COMPOSE) run --rm $(PROJECT_TESTER_SERVICE) php-cs-fixer fix --format=txt -v ../src
 
 lint-source:	 ##@development run source-code linting
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Liniting source-code with cs-fixer
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) php-cs-fixer fix --format=txt -v --dry-run ../../src
+	$(DOCKER_COMPOSE) run --rm $(PROJECT_TESTER_SERVICE) php-cs-fixer fix --format=txt -v --dry-run ../../src
 
 lint-metrics:	 ##@development run source-code metrics
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -206,19 +211,19 @@ lint-composer: ##@development run composer linting
 	#
 	# Liniting composer configuration
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) composer -d../ --no-ansi --no-check-publish validate
+	$(DOCKER_COMPOSE) run --rm $(PROJECT_TESTER_SERVICE) composer -d../ --no-ansi --no-check-publish validate
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Listing installed packages
 	#
-	$(DOCKER_COMPOSE) run --rm $(TESTER_SERVICE) sh -c 'composer -d../ --no-ansi show -f json | tee _log/packages-$(shell cat /app/src/version).json'
+	$(DOCKER_COMPOSE) run --rm $(PROJECT_TESTER_SERVICE) sh -c 'composer -d../ --no-ansi show -f json | tee _log/packages-$(shell cat /app/src/version).json'
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	#
 	# Listing outdated packages
 	#
-	$(DOCKER_COMPOSE) run -T --rm $(TESTER_SERVICE) sh -c 'composer  -d../ --no-ansi show -o -f json | grep -zo "\{.*\}" | tee _log/outdated-packages-$(shell cat /app/src/version).json'
+	$(DOCKER_COMPOSE) run -T --rm $(PROJECT_TESTER_SERVICE) sh -c 'composer  -d../ --no-ansi show -o -f json | grep -zo "\{.*\}" | tee _log/outdated-packages-$(shell cat /app/src/version).json'
 
 
 lint-html:

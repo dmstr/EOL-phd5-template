@@ -3,7 +3,10 @@ stages:
   - build
   - test
   - release
-  - cleanup
+  - deploy
+
+variables:
+  COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml'
 
 before_script:
   - echo $CI_SERVER_NAME
@@ -15,22 +18,21 @@ before_script:
   - export STACK_PHP_IMAGE=${REGISTRY_HOST}/${CI_PROJECT_PATH}/php:${APP_VERSION}
   - export STACK_PHP_IMAGE_LATEST=${REGISTRY_HOST}/${CI_PROJECT_PATH}/php:latest
 
-  - cp .env-dist .env
+  - docker-compose config
   # ensure a Docker image with correct version exists
   - make version build
 
 after_script:
   # set docker-compose isolation
   - export COMPOSE_PROJECT_NAME=$(echo "buildpipeline${CI_PIPELINE_ID}${CI_PROJECT_NAME}${CI_BUILD_NAME}"  | tr -dc '[:alnum:]\n\r' | tr '[:upper:]' '[:lower:]')
-  - cp .env-dist .env
   - docker-compose down -v
 
 test:project:
   stage: test
   variables:
-    APP_MIGRATION_LOOKUP: /app/project/tests/codeception/_migrations/data
+    COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml:./docker/docker-compose.test-project.yml:./docker/docker-compose.selenium.yml'
   script:
-    - make test
+    - make test || (docker-compose logs > _host-volumes/project-tests-log/docker.log && exit 1)
   artifacts:
     paths:
       - _host-volumes/project-tests-log
@@ -39,26 +41,31 @@ test:project:
 test:app:
   stage: test
   variables:
-    APP_MIGRATION_LOOKUP: "/app/tests/codeception/_migrations/data"
-    APP_CONFIG_FILE: "/app/project/config/main.php,/app/tests/codeception/_config/test.php"
+    COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml:./docker/docker-compose.test-app.yml:./docker/docker-compose.selenium.yml'
   script:
-    - make app-test
+    - make app-test || (docker-compose logs > _host-volumes/app-tests-log/docker.log && exit 1)
+  artifacts:
+    paths:
+      - _host-volumes/app-tests-log
+    when: always
+  except:
+    - /^feature/
+
+lint:
+  stage: test
+  variables:
+    COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml:./docker/docker-compose.test-project.yml'
+  script:
+    - make lint
   artifacts:
     paths:
       - _host-volumes/app-tests-log
     when: always
 
-lint:
-  stage: test
-  script:
-    - make lint
-  artifacts:
-    paths:
-      - project/tests/codeception/_log
-    when: always
-
 release:latest:
   stage: release
+  environment:
+    name: images
   script:
     - docker tag ${BUILD_PHP_IMAGE} ${STACK_PHP_IMAGE_LATEST}
     - docker push ${STACK_PHP_IMAGE_LATEST} || exit 1
@@ -67,6 +74,8 @@ release:latest:
 
 release:tags:
   stage: release
+  environment:
+    name: images
   script:
     - docker tag ${BUILD_PHP_IMAGE} ${STACK_PHP_IMAGE}
     - docker push ${STACK_PHP_IMAGE} || exit 1

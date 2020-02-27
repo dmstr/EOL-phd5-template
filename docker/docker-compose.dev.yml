@@ -7,7 +7,7 @@ services:
 
   php:
     build:
-      context: ..
+      context: .
       dockerfile: Dockerfile
     ports:
       - '80'
@@ -24,15 +24,16 @@ services:
 
     volumes:
       # Application source-code
-      - ../project/:/app/project:cached
+      - ./project/:/app/project:cached
       # Vendor source-code
-      - ../vendor-dev:/app/vendor:delegated
+      - ./vendor-dev:/app/vendor:delegated
       # For composer usage in container; NOTE! There may be performance issues, see also https://github.com/docker/for-mac/issues/77
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./web/images:/app/web/images:delegated
 
   db:
     #command: --character-set-server=utf8 --collation-server=utf8_general_ci
-    image: percona:5.7
+    image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=secret
     ports:

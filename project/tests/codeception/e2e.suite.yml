@@ -4,14 +4,18 @@ modules:
         - \Helper\E2e
         - WebDriver
         - Asserts
+        - MailCatcher
     config:
         WebDriver:
-            browser: firefox
-            host: firefox
+            browser: chrome
+            host: chrome
             port: 4444
-            window_size: 1024x768
+            window_size: 1200x600
             restart: true
-            url: http://web:80/
+            url: http://project:80/
+        MailCatcher:
+            url: http://mailcatcher
+            port: 80
 env:
     firefox:
       modules:

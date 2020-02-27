@@ -19,7 +19,7 @@ modules:
             configFile: 'codeception/_config/codeception-module.php'
 cleanup: false
 config:
-    test_entry_url: http://web:80/index.php
+    test_entry_url: http://project:80/index.php
 coverage:
     enabled: true
     c3_url: http://web/
@@ -28,5 +28,5 @@ coverage:
         include:
             - ../*.php
         exclude:
-            - ./../tests
-            - ./../config
+            - ./tests
+            - ./config

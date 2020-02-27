@@ -2,7 +2,6 @@ DB_ENV_MYSQL_ROOT_PASSWORD=secret
 PHP_ENABLE_XDEBUG
 YII_ENV=test
 APP_INTERACTIVE=0
-APP_CONFIG_FILE=/app/project/config/main.php,/app/project/tests/codeception/_config/test.php
 APP_ADMIN_PASSWORD=admin1
 APP_ADMIN_EMAIL=admin@test.local
 APP_ASSET_USE_BUNDLED=1

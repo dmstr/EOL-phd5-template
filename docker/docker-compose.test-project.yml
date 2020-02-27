@@ -1,0 +1,34 @@
+# Test stack overrides
+# ====================
+#
+# Paths in this file are relative to the project root
+
+version: '3.2'
+services:
+
+  project-test-php:
+    build: .
+    working_dir: /app/project/tests
+    ports:
+      - 80
+    depends_on:
+      - db
+      - redis
+      - mailcatcher
+    env_file:
+      - ./project/tests/env-defaults
+    environment:
+      - APP_MIGRATION_LOOKUP=/app/project/tests/codeception/_migrations/data,@project/modules/huntingcoverage/migrations/data,@project/modules/huntingcoverage/migrations/demo
+      - APP_CONFIG_FILE=/app/project/config/main.php,/app/project/tests/codeception/_config/test.php
+      - APP_ADMIN_EMAIL=admin@test.local
+      - APP_NAME=project-test
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./project/tests:/app/project/tests
+      - ./vendor-dev:/app/vendor
+      - ./_host-volumes/app-tests-log:/app/tests/_log
+      - ./_host-volumes/project-tests-log:/app/project/tests/_log
+    networks:
+      default:
+        aliases:
+          - project

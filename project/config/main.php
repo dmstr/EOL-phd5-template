@@ -8,9 +8,13 @@ $common = [
         '@project' => '@root/project/src'
     ],
     'modules' => [
+        'jss' => [
+            'class' => project\modules\jss\Module::class,
+            'layout' => '@backend/views/layouts/main',
+        ],
         'user' => [
             'generatePasswords' => true
-        ]
+        ],
     ]
 ];
 

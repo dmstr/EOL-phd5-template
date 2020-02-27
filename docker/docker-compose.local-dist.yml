@@ -8,5 +8,5 @@ services:
   php:
     volumes:
       # Debug
-      #- ../_host-volume/assets:/app/web/assets
-      - ../_host-volume/runtime:/app/runtime
+      #- ./_host-volume/assets:/app/web/assets
+      - ./_host-volume/runtime:/app/runtime
