@@ -22,6 +22,7 @@ services:
       - APP_CONFIG_FILE=/app/project/config/main.php,/app/project/tests/codeception/_config/test.php
       - APP_ADMIN_EMAIL=admin@test.local
       - APP_NAME=project-test
+      - PHP_ENABLE_XDEBUG=1
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./project/tests:/app/project/tests
