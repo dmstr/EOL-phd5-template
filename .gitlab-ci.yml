@@ -31,6 +31,7 @@ test:project:
   script:
     - make test || (docker-compose logs > _host-volumes/project-tests-log/docker.log && exit 1)
   artifacts:
+    name: "${CI_PROJECT_NAME}_${CI_PIPELINE_ID}_${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}"
     paths:
       - _host-volumes/project-tests-log
     when: always
@@ -42,6 +43,7 @@ test:app:
   script:
     - make app-test || (docker-compose logs > _host-volumes/app-tests-log/docker.log && exit 1)
   artifacts:
+    name: "${CI_PROJECT_NAME}_${CI_PIPELINE_ID}_${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}"
     paths:
       - _host-volumes/app-tests-log
     when: always
@@ -55,6 +57,7 @@ lint:
   script:
     - make lint
   artifacts:
+    name: "${CI_PROJECT_NAME}_${CI_PIPELINE_ID}_${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}"
     paths:
       - _host-volumes/app-tests-log
     when: always
