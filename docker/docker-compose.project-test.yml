@@ -20,7 +20,7 @@ services:
     environment:
       - APP_MIGRATION_LOOKUP=/app/project/tests/codeception/_migrations/data,@project/modules/huntingcoverage/migrations/data,@project/modules/huntingcoverage/migrations/demo
       - APP_CONFIG_FILE=/app/project/config/main.php,/app/project/tests/codeception/_config/test.php
-      - APP_ADMIN_EMAIL=admin@test.local
+      - APP_ADMIN_EMAIL=admin@project-test.local
       - APP_NAME=project-test
       - PHP_ENABLE_XDEBUG=1
     volumes:

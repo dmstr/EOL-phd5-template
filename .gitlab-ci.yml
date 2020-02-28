@@ -5,9 +5,6 @@ stages:
   - release
   - deploy
 
-variables:
-  COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml'
-
 before_script:
   - echo $CI_SERVER_NAME
   # create sanitized project name
@@ -30,7 +27,7 @@ after_script:
 test:project:
   stage: test
   variables:
-    COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml:./docker/docker-compose.test-project.yml:./docker/docker-compose.selenium.yml'
+    COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml:./docker/docker-compose.project-test.yml:./docker/docker-compose.selenium.yml'
   script:
     - make test || (docker-compose logs > _host-volumes/project-tests-log/docker.log && exit 1)
   artifacts:
@@ -41,7 +38,7 @@ test:project:
 test:app:
   stage: test
   variables:
-    COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml:./docker/docker-compose.test-app.yml:./docker/docker-compose.selenium.yml'
+    COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml:./docker/docker-compose.app-test.yml:./docker/docker-compose.selenium.yml'
   script:
     - make app-test || (docker-compose logs > _host-volumes/app-tests-log/docker.log && exit 1)
   artifacts:
@@ -54,7 +51,7 @@ test:app:
 lint:
   stage: test
   variables:
-    COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml:./docker/docker-compose.test-project.yml'
+    COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml:./docker/docker-compose.project-test.yml'
   script:
     - make lint
   artifacts:

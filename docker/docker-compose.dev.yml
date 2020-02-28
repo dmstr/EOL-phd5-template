@@ -18,7 +18,7 @@ services:
       - DB_ENV_MYSQL_ROOT_PASSWORD=secret
       - GITHUB_API_TOKEN
       - ENV_LOCAL_FILE=../project/config/local.env
-      - APP_MAILER_USE_FILE_TRANSPORT=1
+      - APP_ADMIN_EMAIL=admin@dev.local
 
     volumes:
       # Application source-code

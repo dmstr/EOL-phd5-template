@@ -20,7 +20,7 @@ services:
     environment:
       - APP_MIGRATION_LOOKUP=/app/tests/codeception/_migrations/data
       - APP_CONFIG_FILE=/app/project/config/main.php,/app/tests/codeception/_config/test.php
-      - APP_ADMIN_EMAIL=admin@test.local
+      - APP_ADMIN_EMAIL=admin@app-test.local
       - APP_NAME=app-test
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
