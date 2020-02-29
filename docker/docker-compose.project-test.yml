@@ -18,7 +18,7 @@ services:
     env_file:
       - ./project/tests/env-defaults
     environment:
-      - APP_MIGRATION_LOOKUP=/app/project/tests/codeception/_migrations/data,@project/modules/huntingcoverage/migrations/data,@project/modules/huntingcoverage/migrations/demo
+      - APP_MIGRATION_LOOKUP=/app/project/tests/codeception/_migrations/data
       - APP_CONFIG_FILE=/app/project/config/main.php,/app/project/tests/codeception/_config/test.php
       - APP_ADMIN_EMAIL=admin@project-test.local
       - APP_NAME=project-test
@@ -27,7 +27,6 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./project/tests:/app/project/tests
       - ./vendor-dev:/app/vendor
-      - ./_host-volumes/app-tests-log:/app/tests/_log
       - ./_host-volumes/project-tests-log:/app/project/tests/_log
     networks:
       default:
