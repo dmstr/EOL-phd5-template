@@ -43,6 +43,7 @@ test:project:coverage:
   variables:
     COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml:./docker/docker-compose.project-test.yml:./docker/docker-compose.selenium.yml'
   script:
+    - make test-init
     - make test-coverage || (docker-compose logs > _host-volumes/project-tests-log/docker.log && exit 1)
   only:
     - coverage
