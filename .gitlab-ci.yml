@@ -30,6 +30,8 @@ test:project:
     COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml:./docker/docker-compose.project-test.yml:./docker/docker-compose.selenium.yml'
   script:
     - make test || (docker-compose logs > _host-volumes/project-tests-log/docker.log && exit 1)
+  except:
+    - coverage
   artifacts:
     name: "${CI_PROJECT_NAME}_${CI_PIPELINE_ID}_${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}"
     paths:
