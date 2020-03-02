@@ -152,8 +152,7 @@ test-coverage: ##@test run tests with code coverage
 	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(PROJECT_TESTER_SERVICE) codecept run --env $(BROWSER_SERVICE) -g ${CODECEPTION_GROUP} --coverage-html --coverage-xml --html --xml
 
 test-init: ##@test initialize test-environment
-	mkdir -p _host-volumes/project-tests-log/codeception/_log && chmod 777 _host-volumes/project-tests-log/codeception/_log
-	mkdir -p _host-volumes/project-tests-log/lint && chmod 777 _host-volumes/project-tests-log/lint
+	mkdir -p _host-volumes/project-tests-log && chmod 777 _host-volumes/project-tests-log
 
 test-bash:	 ##@test execute tester bash in running container
 	#
