@@ -36,6 +36,20 @@ test:project:
       - _host-volumes/project-tests-log
     when: always
 
+test:project:coverage:
+  stage: test
+  variables:
+    COMPOSE_FILE: './docker-compose.yml:./docker/docker-compose.dev.yml:./docker/docker-compose.project-test.yml:./docker/docker-compose.selenium.yml'
+  script:
+    - make test-coverage || (docker-compose logs > _host-volumes/project-tests-log/docker.log && exit 1)
+  only:
+    - coverage
+  artifacts:
+    name: "${CI_PROJECT_NAME}_${CI_PIPELINE_ID}_${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}"
+    paths:
+      - _host-volumes/project-tests-log
+    when: always
+
 test:app:
   stage: test
   variables:
