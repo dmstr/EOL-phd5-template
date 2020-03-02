@@ -62,8 +62,6 @@ clean: ##@base remove all containers in stack
 	$(DOCKER_COMPOSE) rm -fv
 	$(DOCKER_COMPOSE) down --remove-orphans
 
-open-db: ##@base open application database service in browser
-	$(OPEN_CMD) mysql://root:secret@$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port db 3306 | sed 's/[0-9.]*://') &>/dev/null
 
 logs: ##@base show logs
 	#
@@ -84,15 +82,15 @@ upgrade: ##@base update application package, pull, rebuild
 	#
 	$(DOCKER_COMPOSE) run --rm php composer update -v
 
-dist-upgrade: ##@base update application package, pull, rebuild
+dist-upgrade: ##@development update application package, pull, rebuild
 	$(DOCKER_COMPOSE) build --pull --build-arg BUILD_NO_INSTALL=1
 	$(MAKE) upgrade
 	$(MAKE) build
 
-install: ##@base install PHP packages
+install: ##@development install PHP packages
 	$(DOCKER_COMPOSE) run --rm php composer install
 
-bash:	 ##@development execute application bash in one-off container
+bash:	 ##@development execute application bash in running container
 	#
 	# Starting application bash
 	#
@@ -111,7 +109,7 @@ assets:	 ##@development open application development bash
 	$(DOCKER_COMPOSE) run --rm -e APP_ASSET_USE_BUNDLED=0 $(PHP_SERVICE) yii asset/compress config/assets.php web/bundles/config.php
 
 
-init:    ##@development install composer package (enable host-volume in docker-compose config)
+init:    ##@development prepares development environment (local config files and folders)
 init:
 	#
 	# Running composer installation in development environment
@@ -126,13 +124,19 @@ setup: ##@development run application setup
 	#
 	$(DOCKER_COMPOSE) run --rm $(PHP_SERVICE) yii app/setup
 
-open: browser
-
+open: browser ##@development alias for: browser
 browser: ##@development open application web service in browser
 	#
 	# Opening application on mapped web-service port
 	#
 	$(OPEN_CMD) http://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port php 80 | sed 's/[0-9.]*://') &>/dev/null
+
+open-db: ##@base open application database service in browser
+	$(OPEN_CMD) mysql://root:secret@$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port db 3306 | sed 's/[0-9.]*://') &>/dev/null
+
+open-mailcatcher: ##@base open mailcatcher service in browser
+	$(OPEN_CMD) http://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port mailcatcher 80 | sed 's/[0-9.]*://') &>/dev/null
+
 
 
 test: version build install up
@@ -142,38 +146,38 @@ test: ##@test run tests
 	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(PROJECT_TESTER_SERVICE) codecept run --env $(BROWSER_SERVICE) -g ${CODECEPTION_GROUP} --steps --html --xml= --tap --json
 
 test-coverage: ##@test run tests with code coverage
-	PHP_ENABLE_XDEBUG=1 $(DOCKER_COMPOSE) up -d
 	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(PROJECT_TESTER_SERVICE) yii app/setup
 	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(PROJECT_TESTER_SERVICE) codecept clean
 	$(DOCKER_COMPOSE) run --rm -e YII_ENV=test $(PROJECT_TESTER_SERVICE) codecept run --env $(BROWSER_SERVICE) -g ${CODECEPTION_GROUP} --coverage-html --coverage-xml --html --xml
 
 test-init: ##@test initialize test-environment
-	cp -n .env-dist .env &2>/dev/null
-	mkdir -p _log/codeception && chmod 777 _log/codeception
-	mkdir -p _log/lint && chmod 777 _log/lint
+	mkdir -p _host-volumes/project-tests-log/codeception/_log && chmod 777 _host-volumes/project-tests-log/codeception/_log
+	mkdir -p _host-volumes/project-tests-log/lint && chmod 777 _host-volumes/project-tests-log/lint
 
-test-bash:	 ##@test run application bash in one-off container
+test-bash:	 ##@test execute tester bash in running container
 	#
 	# Starting application bash
 	#
 	$(DOCKER_COMPOSE) run --rm $(PROJECT_TESTER_SERVICE)  bash
 
-test-open: test-browser
+test-cli:	 ##@test run application test bash in one-off container
+	#
+	# Starting application bash
+	#
+	$(DOCKER_COMPOSE) run --rm -v $(PWD)/vendor-dev:/app/vendor $(PROJECT_TESTER_SERVICE) bash
 
-test-browser: ##@test open application web service in browser
+test-open: test-browser ##@test alias for: test-browser
+test-browser: ##@test open application project-test web service in browser
 	#
 	# Opening application on mapped web-service port
 	#
 	$(OPEN_CMD) http://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port $(PROJECT_TESTER_SERVICE)  80 | sed 's/[0-9.]*://') &>/dev/null
 
-test-selenium: ##@test open application database service in browser
+test-selenium: ##@test open selenium container via VNC
 	$(OPEN_CMD) vnc://$(DOCKER_HOST_IP):$(shell $(DOCKER_COMPOSE) port $(BROWSER_SERVICE) 5900 | sed 's/[0-9.]*://') &>/dev/null
 
-test-report: ##@test open HTML reports
-	$(OPEN_CMD) _log/codeception/report.html &>/dev/null
-
-test-report-coverage: ##@test open HTML reports
-	$(OPEN_CMD) _log/coverage/index.html &>/dev/null
+test-report: ##@test open report/log folder
+	$(OPEN_CMD) _host-volumes/project-tests-log &>/dev/null
 
 app-test: version build install up
 app-test: ##@test run tests
@@ -223,8 +227,8 @@ lint-composer: ##@development run composer linting
 	#
 	# Listing outdated packages
 	#
-	$(DOCKER_COMPOSE) run -T --rm $(PROJECT_TESTER_SERVICE) sh -c 'composer  -d../ --no-ansi show -o -f json | grep -zo "\{.*\}" | tee _log/outdated-packages-$(shell cat /app/src/version).json'
-
+	$(DOCKER_COMPOSE) run -T --rm $(PROJECT_TESTER_SERVICE) composer --no-ansi show -o -f json | grep -zo "\{.*\}" | tee tests/_log/composer-outdated-packages-$(shell cat ./project/version).json || ERROR=1; \
+	exit ${ERROR}
 
 lint-html:
 	COMPOSE_FILE=$(COMPOSE_FILE_QA) $(DOCKER_COMPOSE) run --rm  validator http://web

@@ -1,4 +1,4 @@
-FROM dmstr/phd5-app:5.4.0-beta17-16-g0c8692d
+FROM dmstr/phd5-app:5.4.0-beta17-20-g11e2a53
 ARG BUILD_NO_INSTALL
 
 # Project packages

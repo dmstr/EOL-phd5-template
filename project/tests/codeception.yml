@@ -22,11 +22,10 @@ config:
     test_entry_url: http://project:80/index.php
 coverage:
     enabled: true
-    c3_url: http://web/
+    c3_url: http://project/
     remote: false
-    whitelist:
-        include:
-            - ../*.php
-        exclude:
-            - ./tests
-            - ./config
+    include:
+        - ../*.php
+    exclude:
+        - ../tests/*
+        - ../config/*
