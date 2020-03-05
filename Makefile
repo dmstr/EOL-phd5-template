@@ -199,7 +199,7 @@ lint-source:	 ##@development run source-code linting
 	#
 	# Liniting source-code with cs-fixer
 	#
-	$(DOCKER_COMPOSE) run --rm $(PROJECT_TESTER_SERVICE) php-cs-fixer fix --format=txt -v --dry-run ../../src
+	$(DOCKER_COMPOSE) run --rm $(PROJECT_TESTER_SERVICE) php-cs-fixer fix --format=txt -v --dry-run ../src
 
 lint-metrics:	 ##@development run source-code metrics
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
