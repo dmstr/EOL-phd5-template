@@ -117,6 +117,7 @@ init:
 	#
 	cp -n .env-dist .env &2>/dev/null
 	touch $(ROOT_PATH)/config/local.env
+	test -f ./docker-compose.local.yml || head -n 1 ./docker-compose.yml > ./docker-compose.local.yml
 
 setup: ##@development run application setup
 	#
