@@ -193,7 +193,7 @@ fix-source:	 ##@development fix source-code linting errors
 	#
 	# Fixing source-code lint errors with cs-fixer
 	#
-	$(DOCKER_COMPOSE) run --rm $(PROJECT_TESTER_SERVICE) php-cs-fixer fix --format=txt -v ../src
+	$(DOCKER_COMPOSE) run --rm $(PROJECT_TESTER_SERVICE) php-cs-fixer fix --using-cache no --format=txt -v ../src
 
 lint-source:	 ##@development run source-code linting
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
