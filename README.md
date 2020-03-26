@@ -21,7 +21,7 @@ This setting will load and merge `docker-compose.dev.yml` with the default confi
 
 To change environment variables for the PHP application at runtime, you can use a local file
 
-    cp project/config/local.env project/config/local.env-dist
+    cp project/config/local.env-dist project/config/local.env
 
 > :bulb: This feature is enabled via `ENV_LOCAL_FILE=...`, it is not recommended for
 production usage.
@@ -57,8 +57,8 @@ Continue with the [quick start tutorial](http://phd.dmstr.io/en/docs/guide/tutor
 
 ## Resources
 
-- :octocat: [Source-code on GitHub](https://github.com/dmstr/planck)
-- :wolf: [Source-code on git.hrzg.de](https://git.hrzg.de/dmstr/planck)
+- :octocat: [Source-code on GitHub](https://github.com/dmstr/phd5-template)
+- :wolf: [Source-code on git.hrzg.de](https://git.hrzg.de/dmstr/phd5-template)
 - :cd: [Base-image phd5](https://github.com/dmstr/phd5-app)
 - :green_book: [Documentation](https://github.com/dmstr/docs-phd5/blob/master/README.md)
 
