@@ -78,7 +78,7 @@ version: ##@base write current version string from git
 upgrade: ##@base update application package, pull, rebuild
 	#
 	# Running package upgrade in container
-	# Note: If you have performance with this operation issues, please check the documentation under http://phd.dmstr.io/docs
+	# Note: If you have performance issues with this operation, please check the documentation under http://phd.dmstr.io/docs
 	#
 	$(DOCKER_COMPOSE) run --rm php composer update -v
 
