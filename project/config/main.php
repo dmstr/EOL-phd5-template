@@ -42,7 +42,9 @@ $web = [];
 $console = [
     'controllerMap' => [
         'migrate' => [
-            'migrationPath' => []
+            'migrationPath' => [
+                // add your project migration paths here
+            ]
         ]
     ]
 ];
