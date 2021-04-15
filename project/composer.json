@@ -12,6 +12,11 @@
             ]
         }
     },
+    "autoload": {
+        "psr-4": {
+            "project\\": "src"
+        }
+    },
     "config": {
         "vendor-dir": "./../vendor",
         "preferred-install": {
