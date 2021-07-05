@@ -3,13 +3,19 @@
     "description": "phd5 app template",
     "minimum-stability": "stable",
     "require": {
-        "wikimedia/composer-merge-plugin": "~1.4"
+        "wikimedia/composer-merge-plugin": "^2.0.1"
     },
     "extra": {
         "merge-plugin": {
             "require": [
                 "./../src/composer.phd5.json"
             ]
+        }
+    },
+    "repositories": {
+        "ap": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
     },
     "config": {
