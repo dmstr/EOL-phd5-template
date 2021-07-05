@@ -18,6 +18,11 @@
             "url": "https://asset-packagist.org"
         }
     },
+    "autoload": {
+        "psr-4": {
+            "project\\": "src"
+        }
+    },
     "config": {
         "vendor-dir": "./../vendor",
         "preferred-install": {
@@ -28,8 +33,8 @@
         },
         "fxp-asset": {
             "installer-paths": {
-                "npm-asset-library": "./../vendor/npm",
-                "bower-asset-library": "./../vendor/bower"
+                "npm-asset-library": "./../vendor/npm-asset",
+                "bower-asset-library": "./../vendor/bower-asset"
             },
             "vcs-driver-options": {
                 "github-no-api": true

@@ -40,6 +40,6 @@ services:
       - '3306'
 
   mailcatcher:
-    image: nisenabe/mailcatcher
+    image: tophfr/mailcatcher:0.6.5_2
     ports:
       - '80'

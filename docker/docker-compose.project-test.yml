@@ -26,7 +26,7 @@ services:
       - C3_CODECEPTION_CONFIG_PATH=/app/project/tests
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./project/tests:/app/project/tests
+      - ./project/:/app/project:cached
       - ./vendor-dev:/app/vendor
       - ./_host-volumes/project-tests-log:/app/project/tests/_log
     networks:

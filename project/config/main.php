@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\ArrayHelper;
+use yii\i18n\DbMessageSource;
 
 // general configuration across all application types
 $common = [
@@ -11,6 +12,11 @@ $common = [
         'user' => [
             'generatePasswords' => true
         ],
+        'translatemanager' => [
+            'root' => [
+                '@project'
+            ]
+        ]
     ]
 ];
 
@@ -18,6 +24,14 @@ $common = [
 $web = [];
 
 // console specific application config
-$console = [];
+$console = [
+    'controllerMap' => [
+        'migrate' => [
+            'migrationPath' => [
+                // add your project migration paths here
+            ]
+        ]
+    ]
+];
 
 return ArrayHelper::merge($common, ${APP_TYPE});
