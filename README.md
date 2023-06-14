@@ -1,4 +1,4 @@
-# NOTICE ❗ Public development discontinued
+# EOL-NOTICE ❗ Public development discontinued
 
 ---
 
