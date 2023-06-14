@@ -1,3 +1,7 @@
+# NOTICE ❗ Public development discontinued
+
+---
+
 phd5-template
 =============
 
